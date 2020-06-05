@@ -15,10 +15,12 @@ class CreateExperimentersTable extends Migration
     {
         Schema::create('experimenters', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('labid');
-            $table->string('name',50);
+            $table->bigInteger('labID');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('email', 255);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

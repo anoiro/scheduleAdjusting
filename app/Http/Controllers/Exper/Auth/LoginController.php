@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\Auth;
+namespace App\Http\Controllers\Exper\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -12,36 +12,34 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::EXPER_HOME;
 
     public function __construct()
     {
-        $this->middleware('guest:user')->except('logout');
+        $this->middleware('guest:exper')->except('logout');
+        //print('logincontroller');
     }
 
-    // Guardの認証方法を指定
     protected function guard()
     {
-        return Auth::guard('user');
+        return Auth::guard('exper');
     }
 
-    // ログイン画面
     public function showLoginForm()
     {
-        return view('user.auth.login');
+        //dd(33);
+        return view('exper.auth.login');
     }
 
-    // ログアウト処理
     public function logout(Request $request)
     {
-        Auth::guard('user')->logout();
+        Auth::guard('exper')->logout();
 
         return $this->loggedOut($request);
     }
 
-    // ログアウトした時のリダイレクト先
     public function loggedOut(Request $request)
     {
-        return redirect(route('user.login'));
+        return redirect(route('exper.login'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\Auth;
+namespace App\Http\Controllers\Exper\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use App\Models\Experimenter;
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::EXPER_HOME;
 
     /**
      * Create a new controller instance.
@@ -25,22 +25,19 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:user');
+        $this->middleware('guest:exper');
     }
 
-    // Guardの認証方法を指定
     protected function guard()
     {
-        return Auth::guard('user');
+        return Auth::guard('exper');
     }
 
-    // 新規登録画面
     public function showRegistrationForm()
     {
-        return view('user.auth.register');
+        return view('exper.auth.register');
     }
 
-    // バリデーション
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -50,10 +47,10 @@ class RegisterController extends Controller
         ]);
     }
 
-    // 登録処理
     protected function create(array $data)
     {
-        return User::create([
+        return Experimenter::create([
+            'labID'    => $data['labID'],
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => Hash::make($data['password']),

@@ -46,9 +46,9 @@ return [
         ],
 
         // Admin用の認証を追加
-        'admin' => [
+        'exper' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'expers',
         ],
         
         'api' => [
@@ -90,9 +90,9 @@ return [
         //     'table' => 'users',
         // ],
 
-        'admin' => [  //追記。マルチログイン
+        'expers' => [  //追記。マルチログイン
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class, // 1 で作成したモデルを指定
+            'model' => App\Models\Experimenter::class, // 1 で作成したモデルを指定
         ],
     ],
 
@@ -120,8 +120,8 @@ return [
         ],
 
         //追記。Laravel6
-        'admins' => [
-            'provider' => 'admins',
+        'expers' => [
+            'provider' => 'expers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
@@ -129,5 +129,4 @@ return [
     ],
     //追記。Laravel6
     'password_timeout' => 10800,
-
 ];

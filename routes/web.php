@@ -44,11 +44,41 @@ Route::group(['prefix' => 'contact', 'middleware' => 'auth'], function () {
 // ]);
 
 //アカウントを作ってログイン認証したらshow()とかindex()とかを実行できるようにしておく
-Auth::routes();
-
+//Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 /////////////////Portfolio1/////////////////
+//Participants User
+Route::namespace('User')->prefix('user')->name('user.')->group(function () {
+    // ログイン認証関連
+    Auth::routes([
+        'register' => true,
+        'reset'    => false,
+        'verify'   => false
+    ]);
+    // ログイン認証後
+    Route::middleware('auth:user')->group(function () {
+        // TOPページ
+        Route::resource('home', 'HomeController', ['only' => 'index']);
+    });
+});
+//Experimenter
+Route::namespace('Exper')->prefix('exper')->name('exper.')->group(function () {
+    //print(100);
+    // ログイン認証関連
+    Auth::routes([
+        'register' => true,
+        'reset'    => false,
+        'verify'   => false
+    ]);
+    // ログイン認証後
+    Route::middleware('auth:exper')->group(function () {
+        //dd(10);
+        // TOPページ
+        Route::resource('home', 'HomeController', ['only' => 'index']);
+    });
+});
+
 //restにはindex,create,
 Route::get('portfolio1/index','Portfolio1Controller@index')->name('portfolio1.index');
 Route::get('portfolio1/create','Portfolio1Controller@create')->name('portfolio1.create');
