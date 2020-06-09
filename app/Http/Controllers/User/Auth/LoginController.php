@@ -34,6 +34,7 @@ class LoginController extends Controller
     // ログアウト処理
     public function logout(Request $request)
     {
+        //dd(8);
         Auth::guard('user')->logout();
 
         return $this->loggedOut($request);

@@ -27,14 +27,12 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        //dd(33);
         return view('exper.auth.login');
     }
 
     public function logout(Request $request)
     {
         Auth::guard('exper')->logout();
-
         return $this->loggedOut($request);
     }
 

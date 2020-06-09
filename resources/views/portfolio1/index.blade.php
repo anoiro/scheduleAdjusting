@@ -1,7 +1,5 @@
 <!-- resources/views/layouts/app.blade.phpとして保存 -->
-
-@extends('layouts.app')
-
+@extends('layouts.exper.app')
 @section('content')
 
 <style>

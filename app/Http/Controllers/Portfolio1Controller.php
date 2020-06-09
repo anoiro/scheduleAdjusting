@@ -44,7 +44,8 @@ class Portfolio1Controller extends Controller
      */
     public function store(Request $request)
     {
-        //前までは$_POST['name']みたいに書いて変数を持ってきていたけどLaravelの場合はRequest型の変数として扱うことができる
+        //前までは$_POST['name']みたいに書いて変数を持ってきていたけどLaravelの場合は
+        //Request型の変数として扱うことができる
         //ちなみにRequestクラスはDI(依存性の注入)によるインスタンス化されたクラス
 
         //ContactFormクラスをインスタンス化
