@@ -39,7 +39,7 @@
                         <img src='data:img/jpg;base64,<?php print(base64_encode($img->img)); ?>' style="width: 50%; height: auto;" />
                     </div>
                     @endif
-                    <form method="GET" action="{{ route('portfolio1par.create') }}">
+                    <form method="GET" action="{{ route('portfolio1par.create', ['id'=>$exp->id]) }}">
                         @csrf
                         <input class="btn btn-info" type="submit" value="参加する">
                     </form>

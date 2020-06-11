@@ -83,7 +83,7 @@ Route::group(['prefix' => 'portfolio1par', 'middleware' => 'auth:user'], functio
     //index
     Route::get('index', 'Portfolio1ParController@index')->name('portfolio1par.index');
     //create
-    Route::get('create', 'Portfolio1ParController@create')->name('portfolio1par.create');
+    Route::get('create/{id}', 'Portfolio1ParController@create')->name('portfolio1par.create');
     //store
     // Route::post('store', 'Portfolio1Controller@store')->name('portfolio1.store');
     //show/{id}とかくと主キーと紐づけてアクセスできる
