@@ -78,7 +78,29 @@ Route::namespace('Exper')->prefix('exper')->name('exper.')->group(function () {
     });
 });
 
-//restにはindex,create,
+//Participant用のページ
+Route::group(['prefix' => 'portfolio1par', 'middleware' => 'auth:user'], function () {
+    //index
+    Route::get('index', 'Portfolio1ParController@index')->name('portfolio1par.index');
+    //create
+    Route::get('create', 'Portfolio1ParController@create')->name('portfolio1par.create');
+    //store
+    // Route::post('store', 'Portfolio1Controller@store')->name('portfolio1.store');
+    //show/{id}とかくと主キーと紐づけてアクセスできる
+    Route::get('show/{id}', 'Portfolio1ParController@show')->name('portfolio1par.show');
+    // //edit
+    // Route::get('edit/{id}', 'Portfolio1Controller@edit')->name('portfolio1.edit');
+    // //update
+    // Route::post('update/{id}', 'Portfolio1Controller@update')->name('portfolio1.update');
+    // //destroy
+    // Route::post('destroy/{id}', 'Portfolio1Controller@destroy')->name('portfolio1.destroy');
+    // //createImg
+    // Route::get('createImg','Portfolio1Controller@createImg')->name('portfolio1.createImg');
+    // //storeImg
+    // Route::post('storeImg','Portfolio1Controller@storeImg')->name('portfolio1.storeImg');
+});
+
+//Experimeten用のページ
 Route::group(['prefix' => 'portfolio1', 'middleware' => 'auth:exper'], function () {
     //index
     Route::get('index', 'Portfolio1Controller@index')->name('portfolio1.index');
@@ -100,9 +122,7 @@ Route::group(['prefix' => 'portfolio1', 'middleware' => 'auth:exper'], function 
     Route::post('storeImg','Portfolio1Controller@storeImg')->name('portfolio1.storeImg');
 });
 
-// Route::resource('portfolio1', 'Portfolio1Controller')->only([
-//      'index', 'show'
-// ]);
-
 Auth::routes();
+Auth::user();
+Auth::id();
 //Route::get('/home', 'HomeController@index')->name('home');
