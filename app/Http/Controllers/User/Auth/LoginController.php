@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function __construct()
     {
         //$this->middleware('guest:user')->except('logout');
-        $this->middleware('auth:user')->except('logout');
+        $this->middleware('guest:user')->except('logout');
     }
 
     // Guardの認証方法を指定

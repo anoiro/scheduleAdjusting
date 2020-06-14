@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 //use App\Models\Participant;
 use Auth;
+use Carbon\Carbon;
 
 class Portfolio1ParController extends Controller
 {
@@ -41,12 +42,15 @@ class Portfolio1ParController extends Controller
         return view('portfolio1par.show', compact('exp', 'img', 'labs'));
     }
 
-    public function create($id)
+    public function create(Request $request, $id)
     {
         $participant = Auth::user();
         $exp = Portfolio1::find($id);
+        $date = new Carbon($exp->start);
+        //$calendar = calendar($date->firstOfMonth());
+        $calendar = calendar($date);
 
-        return view('portfolio1par.create', compact('participant', 'exp'));
+        return view('portfolio1par.create', compact('participant', 'exp', 'calendar', 'date'));
     }
     /**
      * Store a newly created resource in storage.
@@ -56,6 +60,7 @@ class Portfolio1ParController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $portfolio1 = new Portfolio1;
         $portfolio1->labID = $request->input('labID');
         $portfolio1->expName = $request->input('expName');
