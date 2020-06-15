@@ -97,21 +97,21 @@
                                             <span class="other">{{ $day->day }}</span>
                                             @endif
                                             <br>
-                                            <input type="checkbox" name="candidate" value="0840">1コマ
+                                            <input type="checkbox" name="{{ $day->day }}candidate" value="{{ $day->day }}0840">1コマ
                                             <br>
-                                            <input type="checkbox" name="candidate" value="1020">2コマ
+                                            <input type="checkbox" name="{{ $day->day }}candidate" value="{{ $day->day }}1020">2コマ
                                             <br>
-                                            <input type="checkbox" name="candidate" value="1245">3コマ
+                                            <input type="checkbox" name="{{ $day->day }}candidate" value="{{ $day->day }}1245">3コマ
                                             <br>
-                                            <input type="checkbox" name="candidate" value="1425">4コマ
+                                            <input type="checkbox" name="{{ $day->day }}candidate" value="{{ $day->day }}1425">4コマ
                                             <br>
-                                            <input type="checkbox" name="candidate" value="1605">5コマ
+                                            <input type="checkbox" name="{{ $day->day }}candidate" value="{{ $day->day }}1605">5コマ
                                             <br>
-                                            <input type="checkbox" name="candidate" value="1800">18:00～19:00
+                                            <input type="checkbox" name="{{ $day->day }}candidate" value="{{ $day->day }}1800">18:00～19:00
                                             <br>
-                                            <input type="checkbox" name="candidate" value="1830">18:30～19:30
+                                            <input type="checkbox" name="{{ $day->day }}candidate" value="{{ $day->day }}1830">18:30～19:30
                                             <br>
-                                            <input type="checkbox" name="candidate" value="1900">19:00～20:00
+                                            <input type="checkbox" name="{{ $day->day }}candidate" value="{{ $day->day }}1900">19:00～20:00
                                             <br>
                                         </div>
                                     </td>
@@ -122,8 +122,7 @@
                         </div>
                         <input type="checkbox" name="caution" value="1">注意事項に同意する
                         <br>
-
-                        <input class="btn btn-info" type="submit" value="参加登録する">
+                        <input class="btn btn-info" type="submit" value="登録する">
                     </form>
                 </div>
             </div>

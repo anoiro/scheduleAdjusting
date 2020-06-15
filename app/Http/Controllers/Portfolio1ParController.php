@@ -52,28 +52,15 @@ class Portfolio1ParController extends Controller
 
         return view('portfolio1par.create', compact('participant', 'exp', 'calendar', 'date'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        dd($request);
-        $portfolio1 = new Portfolio1;
-        $portfolio1->labID = $request->input('labID');
-        $portfolio1->expName = $request->input('expName');
-        //$portfolio1->imageID = $request->input('imageID');
-        $portfolio1->start = $request->input('start');
-        $portfolio1->end = $request->input('end');
-        $portfolio1->recruit = $request->input('recruit');
-        $portfolio1->thanks = $request->input('thanks');
-        $portfolio1->room = $request->input('room');
-
-        //上で代入した値たちを保存する
-        $portfolio1->save();
-        //indexページに飛ばすheaderみたいな感じかな
-        return redirect('portfolio1/index');
+        print(88);
     }
 }
