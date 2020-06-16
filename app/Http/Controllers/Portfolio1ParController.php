@@ -8,6 +8,7 @@ use App\Models\Portfolio1;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Candidate;
 //use App\Models\Participant;
 use Auth;
 use Carbon\Carbon;
@@ -59,8 +60,16 @@ class Portfolio1ParController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request,$id)
     {
-        print(88);
+        foreach($request->input('candidate') as $date){
+            $candiDate = new Candidate;
+            $candiDate->participantID = $id;
+            $candiDate->date = $date;
+            $candiDate->save();
+        }
+
+        //indexページに飛ばすheaderみたいな感じかな
+        return redirect('portfolio1par/index');
     }
 }
