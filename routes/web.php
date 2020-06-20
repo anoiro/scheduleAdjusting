@@ -88,16 +88,12 @@ Route::group(['prefix' => 'portfolio1par', 'middleware' => 'auth:user'], functio
     Route::post('store/{id}', 'Portfolio1ParController@store')->name('portfolio1par.store');
     //show/{id}とかくと主キーと紐づけてアクセスできる
     Route::get('show/{id}', 'Portfolio1ParController@show')->name('portfolio1par.show');
-    // //edit
-    // Route::get('edit/{id}', 'Portfolio1Controller@edit')->name('portfolio1.edit');
-    // //update
-    // Route::post('update/{id}', 'Portfolio1Controller@update')->name('portfolio1.update');
+    //edit
+    Route::get('edit/{id}', 'Portfolio1ParController@edit')->name('portfolio1par.edit');
+    //update
+    Route::post('update/{id}', 'Portfolio1ParController@update')->name('portfolio1par.update');
     // //destroy
     // Route::post('destroy/{id}', 'Portfolio1Controller@destroy')->name('portfolio1.destroy');
-    // //createImg
-    // Route::get('createImg','Portfolio1Controller@createImg')->name('portfolio1.createImg');
-    // //storeImg
-    // Route::post('storeImg','Portfolio1Controller@storeImg')->name('portfolio1.storeImg');
 });
 
 //Experimeten用のページ

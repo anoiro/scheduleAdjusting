@@ -47,6 +47,11 @@
                         <input type="radio" name="email" value="{{ $participant->email }}">{{ $participant->email }}</input>
                         <br>
                         <br>
+                        実験名
+                        <br>
+                        <input type="radio" name="expID" value="{{ $exp->id }}">{{ $exp->expName }}</input>
+                        <br>
+                        <br>
 
                         参加可能日をお選びください
                         <div class="calender">

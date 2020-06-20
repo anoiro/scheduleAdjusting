@@ -15,8 +15,9 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('expID');
             $table->bigInteger('participantID');
-            $table->date('date');
+            $table->dateTime('datetime');
             $table->timestamps();
         });
     }
