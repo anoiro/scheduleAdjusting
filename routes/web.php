@@ -92,8 +92,8 @@ Route::group(['prefix' => 'portfolio1par', 'middleware' => 'auth:user'], functio
     Route::get('edit/{id}', 'Portfolio1ParController@edit')->name('portfolio1par.edit');
     //update
     Route::post('update/{id}', 'Portfolio1ParController@update')->name('portfolio1par.update');
-    // //destroy
-    // Route::post('destroy/{id}', 'Portfolio1Controller@destroy')->name('portfolio1.destroy');
+    //destroy
+    Route::post('destroy/{id}{expID}', 'Portfolio1ParController@destroy')->name('portfolio1par.destroy');
 });
 
 //Experimeten用のページ

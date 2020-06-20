@@ -154,7 +154,7 @@ class Portfolio1ParController extends Controller
                     ->where('expID', $request->input('expID'))
                     ->where('datetime', $datetime->datetime)
                     ->first();
-                $deletingDate=Candidate::find($deletingDate->id);
+                $deletingDate = Candidate::find($deletingDate->id);
                 $deletingDate->delete();
             }
         }
@@ -166,9 +166,16 @@ class Portfolio1ParController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$expID)
     {
-        $portfolio1 = Portfolio1::find($id);
-        $portfolio1->delete();
+        $deletingDates = DB::table('candidates')
+            ->where('participantID', $id)
+            ->where('expID', $expID)
+            ->get();
+        foreach ($deletingDates as $deletingDate) {
+            $candidate = Candidate::find($deletingDate->id);
+            $candidate->delete();
+        }
+        return redirect('portfolio1par/index');
     }
 }

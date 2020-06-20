@@ -125,16 +125,26 @@
                                 @endforeach
                             </table>
                         </div>
-
-
-
                         <input type="checkbox" name="caution" value="1">注意事項に同意する
                         <br>
-                        <input class="btn btn-info" type="submit" value="登録する">
+                        <input class="btn btn-info" type="submit" value="変更する">
+                    </form>
+                    <form method="POST" action="{{ route('portfolio1par.destroy', ['id'=>$participant->id, 'expID'=>$exp->id]) }}" id="delete_{{ $participant->id }}">
+                        @csrf
+                        <a href="#" class="btn btn-danger" data-id="{{ $participant->id }}" onclick="deletePost(this);">全て削除する</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function deletePost(e){
+        'use strict';
+        if(confirm('本当に削除していいですか?')){
+            document.getElementById('delete_'+e.dataset.id).submit();
+        }
+    }
+</script>
+
 @endsection
