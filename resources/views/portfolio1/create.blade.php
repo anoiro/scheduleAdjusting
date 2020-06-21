@@ -53,6 +53,9 @@
                         会場
                         <input type="text" name="room">
                         <br>
+                        休日の募集
+                        <input type="checkbox" name="weekend" value="1">土日も募集する
+                        <br>
 
                         <input type="checkbox" name="caution" value="1">注意事項に同意する
                         <br>

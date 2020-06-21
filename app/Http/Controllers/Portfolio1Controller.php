@@ -15,7 +15,6 @@ class Portfolio1Controller extends Controller
 {
     public function index()
     {
-        //クエリビルダ
         $exps = DB::table('portfolio1s')
             ->join('labs', 'portfolio1s.labID', '=', 'labs.id')
             ->select('portfolio1s.*', 'labs.prof',)
@@ -52,12 +51,12 @@ class Portfolio1Controller extends Controller
         $portfolio1 = new Portfolio1;
         $portfolio1->labID = $request->input('labID');
         $portfolio1->expName = $request->input('expName');
-        //$portfolio1->imageID = $request->input('imageID');
         $portfolio1->start = $request->input('start');
         $portfolio1->end = $request->input('end');
         $portfolio1->recruit = $request->input('recruit');
         $portfolio1->thanks = $request->input('thanks');
         $portfolio1->room = $request->input('room');
+        $portfolio1->weekend = $request->input('weekend');
         $portfolio1->save();
 
         //画像
@@ -89,11 +88,6 @@ class Portfolio1Controller extends Controller
             ->select('id', 'prof')
             ->where('labs.id', $exp->labID)
             ->get();
-
-        //ファットコントローラーにならないようにする
-        // $gender = CheckFormData::checkGender($exp);
-        // $age = CheckFormData::checkAge($exp);
-        //dd($exp);
 
         return view('portfolio1.show', compact('exp', 'img', 'labs'));
     }

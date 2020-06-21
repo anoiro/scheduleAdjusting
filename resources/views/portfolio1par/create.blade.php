@@ -54,6 +54,7 @@
                         <br>
 
                         参加可能日をお選びください
+                        @if($exp->weekend===1) <br>※土日は募集していません @endif
                         <div class="calender">
                             {{-- <form class="prev-next-form"></form> --}}
                             <table class="table">
@@ -95,28 +96,28 @@
                                     <td>
                                         <div class="text-center">
                                             @if($day->weekDay() === 0)
-                                            <span class="sun" style="color: red">{{ $day->day }}</span>
+                                            <span class="sun" style="color:red;">{{ $day->day }}</span>
                                             @elseif($day->weekDay() === 6)
                                             <span class="sat" style="color:blue;">{{ $day->day }}</span>
                                             @else
                                             <span class="other">{{ $day->day }}</span>
                                             @endif
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+8 hours')->modify('+40 minutes') }}">1コマ
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+8 hours')->modify('+40 minutes') }}" @if($exp->weekend===1 and ($day->weekDay() === 0 or $day->weekDay() === 6)) disabled='disabled' @endif>1コマ
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+10 hours')->modify('+20 minutes') }}">2コマ
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+10 hours')->modify('+20 minutes') }}" @if($exp->weekend===1 and ($day->weekDay() === 0 or $day->weekDay() === 6)) disabled='disabled' @endif>2コマ
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+12 hours')->modify('+45 minutes') }}">3コマ
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+12 hours')->modify('+45 minutes') }}" @if($exp->weekend===1 and ($day->weekDay() === 0 or $day->weekDay() === 6)) disabled='disabled' @endif>3コマ
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+14 hours')->modify('+25 minutes') }}">4コマ
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+14 hours')->modify('+25 minutes') }}" @if($exp->weekend===1 and ($day->weekDay() === 0 or $day->weekDay() === 6)) disabled='disabled' @endif>4コマ
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+16 hours')->modify('+5 minutes') }}">5コマ
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+16 hours')->modify('+5 minutes') }}" @if($exp->weekend===1 and ($day->weekDay() === 0 or $day->weekDay() === 6)) disabled='disabled' @endif>5コマ
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+18 hours') }}">18:00～19:00
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+18 hours') }}" @if($exp->weekend===1 and ($day->weekDay() === 0 or $day->weekDay() === 6)) disabled='disabled' @endif>18:00～19:00
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+18 hours')->modify('+30 minutes') }}">18:30～19:30
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+18 hours')->modify('+30 minutes') }}" @if($exp->weekend===1 and ($day->weekDay() === 0 or $day->weekDay() === 6)) disabled='disabled' @endif>18:30～19:30
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+19 hours') }}">19:00～20:00
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+19 hours') }}" @if($exp->weekend===1 and ($day->weekDay() === 0 or $day->weekDay() === 6)) disabled='disabled' @endif>19:00～20:00
                                             <br>
                                         </div>
                                     </td>
@@ -125,8 +126,6 @@
                                 @endforeach
                             </table>
                         </div>
-
-
 
                         <input type="checkbox" name="caution" value="1">注意事項に同意する
                         <br>
