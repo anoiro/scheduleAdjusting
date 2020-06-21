@@ -24,26 +24,18 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('portfolio1.store') }}">
+                    <form method="POST" action="{{ route('portfolio1.store') }}" enctype="multipart/form-data">
                         @csrf
                         研究室
-                        <select name="labID">
-                            <option value="">選択してください</option>
-                            @foreach($labs as $lab)
-                            <option value="{{ $lab->id }}">{{ $lab->prof }}研究室</option>
-                            @endforeach
-                        </select>
+                        <input type="radio" name="labID" value='{{ $lab->id }}'>{{ $lab->prof }}研究室
                         <br>
                         実験名
                         <input type="text" name="expName">
                         <br>
                         実験風景
                         <br>
-                        @foreach($labImgs as $labImg)
-                        <input type="radio" name="image" value="{{ $labImg->expID }}">
-                        <img src='data:img/jpg;base64,<?php print(base64_encode($labImg->img)); ?>' style="width: 50%; height: auto;" />
+                        <input type="file" name="img">
                         <br>
-                        @endforeach
                         開始日
                         <input type="date" name="start">
                         <br>

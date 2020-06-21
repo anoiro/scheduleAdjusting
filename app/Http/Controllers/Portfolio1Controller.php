@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Portfolio1;
 use App\Models\Image;
+use App\Models\Experimenter;
+use App\Models\Lab;
+use Auth;
 use Illuminate\Support\Facades\DB;
 
 class Portfolio1Controller extends Controller
@@ -21,20 +24,21 @@ class Portfolio1Controller extends Controller
         return view('portfolio1.index', compact('exps'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $experimenter = DB::table('experimenters')
-        ->select() //experimenterが認証されたときのLabIDを取ってくる処理を追加したい
-        ->get();
-        $labs = DB::table('labs')
-        ->select('id', 'prof')
-        ->get();
+        $experimenter = Experimenter::find(Auth::id());
+        $lab= Lab::find($experimenter->labID);
         $labImgs = DB::table('images') #自分の研究室の他の画像
         ->select('id', 'labID', 'expID', 'img')
-        //->where('images.labID', $experimenter->labID)
+        ->where('images.labID', $experimenter->labID)
         ->get();
 
-        return view('portfolio1.create', compact('labs', 'labImgs'));
+        return view('portfolio1.create', compact('experimenter','lab', 'labImgs'));
     }
     /**
      * Store a newly created resource in storage.
@@ -44,11 +48,7 @@ class Portfolio1Controller extends Controller
      */
     public function store(Request $request)
     {
-        //前までは$_POST['name']みたいに書いて変数を持ってきていたけどLaravelの場合は
-        //Request型の変数として扱うことができる
-        //ちなみにRequestクラスはDI(依存性の注入)によるインスタンス化されたクラス
-
-        //ContactFormクラスをインスタンス化
+        //実験内容(画像以外)
         $portfolio1 = new Portfolio1;
         $portfolio1->labID = $request->input('labID');
         $portfolio1->expName = $request->input('expName');
@@ -58,10 +58,20 @@ class Portfolio1Controller extends Controller
         $portfolio1->recruit = $request->input('recruit');
         $portfolio1->thanks = $request->input('thanks');
         $portfolio1->room = $request->input('room');
-
-        //上で代入した値たちを保存する
         $portfolio1->save();
-        //indexページに飛ばすheaderみたいな感じかな
+
+        //画像
+        $image = new Image;
+        $image->labID = $portfolio1->labID;
+        $image->expID = $portfolio1->id;
+        $image->expID = '20';
+        $image->img = file_get_contents($_FILES['img']['tmp_name']);
+        $image->save();
+
+        //実験テーブルの画像IDを登録
+        $portfolio1->imageID = $image->id;
+        $portfolio1->save();
+
         return redirect('portfolio1/index');
     }
 
@@ -145,13 +155,17 @@ class Portfolio1Controller extends Controller
      */
     public function destroy($id)
     {
-        //
         $portfolio1 = Portfolio1::find($id);
         $portfolio1->delete();
 
         return redirect('portfolio1/index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function createImg()
     {
         $experimenter = DB::table('experimenters')
@@ -172,6 +186,12 @@ class Portfolio1Controller extends Controller
         return view('portfolio1.createImg', compact('labs', 'exps'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function storeImg(Request $request)
     {
         $image = new Image;

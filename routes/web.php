@@ -96,7 +96,7 @@ Route::group(['prefix' => 'portfolio1par', 'middleware' => 'auth:user'], functio
     Route::post('destroy/{id}{expID}', 'Portfolio1ParController@destroy')->name('portfolio1par.destroy');
 });
 
-//Experimeten用のページ
+//Experimeter用のページ
 Route::group(['prefix' => 'portfolio1', 'middleware' => 'auth:exper'], function () {
     //index
     Route::get('index', 'Portfolio1Controller@index')->name('portfolio1.index');

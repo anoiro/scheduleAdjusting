@@ -88,7 +88,6 @@ class Portfolio1ParController extends Controller
             $candiDate->save();
         }
 
-        //indexページに飛ばすheaderみたいな感じかな
         return redirect('portfolio1par/index');
     }
     /**
