@@ -65,11 +65,41 @@ class Portfolio1ParController extends Controller
     {
         $participant = Auth::user();
         $exp = Portfolio1::find($id);
-        $date = new Carbon($exp->start);
+        $start = new Carbon($exp->start);
+        $end = new Carbon($exp->end);
+        if($start->year==$end->year){
+            $betweenMonths=$end->month-$start->month+1;
+        }else{
+            $betweenMonths=(12-$start->month+1)+
+            12*($end->year-($start->year+1))+
+            $end->month;
+        }
         //$calendar = calendar($date->firstOfMonth());
-        $calendar = calendar($date);
+        // $calendarstart=calendar($start);
+        // $calendarend=calendar($end);
 
-        return view('portfolio1par.create', compact('participant', 'exp', 'calendar', 'date'));
+        //$calendar = calendar($start);
+        $calendars[] = calendar($start);
+        $j=0;
+        while($j<$betweenMonths-1){
+            $calendars[]=calendar($end->modify('-1 month')->firstOfMonth());
+            $j=$j+1;
+        }
+        // if($calendarstart==$calendarend){
+        //     dd($calendars);
+        // }
+
+        // foreach($calendars as $calendar){
+        //     foreach($calendar as $week){
+        //         foreach($week as $day){
+        //             dd($day);
+        //         }
+        //     }
+        // }
+        //$start1 = new Carbon($exp->start);
+        // $end = new Carbon($exp->end);
+
+        return view('portfolio1par.create', compact('participant', 'exp', 'start', 'end', 'calendars', 'betweenMonths'));
     }
 
     /**
@@ -165,7 +195,7 @@ class Portfolio1ParController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,$expID)
+    public function destroy($id, $expID)
     {
         $deletingDates = DB::table('candidates')
             ->where('participantID', $id)
