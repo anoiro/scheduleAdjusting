@@ -25,7 +25,7 @@
                         実験新規登録
                     </button>
                 </form>
-                <form method='GET' action="">
+                <form method='GET' action="{{ route('portfolio1.createDate') }}">
                     <button type='submit' class='btn btn-success'>
                         参加者一覧
                     </button>

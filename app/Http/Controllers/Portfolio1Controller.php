@@ -9,6 +9,8 @@ use App\Models\Image;
 use App\Models\Experimenter;
 use App\Models\Lab;
 use Auth;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class Portfolio1Controller extends Controller
@@ -31,13 +33,13 @@ class Portfolio1Controller extends Controller
     public function create()
     {
         $experimenter = Experimenter::find(Auth::id());
-        $lab= Lab::find($experimenter->labID);
+        $lab = Lab::find($experimenter->labID);
         $labImgs = DB::table('images') #自分の研究室の他の画像
-        ->select('id', 'labID', 'expID', 'img')
-        ->where('images.labID', $experimenter->labID)
-        ->get();
+            ->select('id', 'labID', 'expID', 'img')
+            ->where('images.labID', $experimenter->labID)
+            ->get();
 
-        return view('portfolio1.create', compact('experimenter','lab', 'labImgs'));
+        return view('portfolio1.create', compact('experimenter', 'lab', 'labImgs'));
     }
     /**
      * Store a newly created resource in storage.
@@ -195,5 +197,55 @@ class Portfolio1Controller extends Controller
 
         $image->save();
         return redirect('portfolio1/index');
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createDate()
+    {
+        $experimenter = Experimenter::find(Auth::id());
+        $lab = Lab::find($experimenter->labID);
+        $exp = DB::table('portfolio1s')
+            ->where('labID', $lab->id)
+            ->first();
+        $start = new Carbon($exp->start);
+        $end = new Carbon($exp->end);
+
+        $img = Image::find($exp->imageID);
+        $candidates = DB::table('candidates')
+            ->where('expID', $exp->id)
+            ->get();
+        foreach ($candidates as $candidate) {
+            $candidatesArray[] = $candidate;
+            //$nonUniParticipants[] = User::find($candidate->participantID);
+            $participants[$candidate->participantID] = User::find($candidate->participantID);
+        }
+        //$participants = array_unique($nonUniParticipants);
+        $dates = array_column($candidatesArray, 'datetime');
+        
+        $participantIDs = array_unique(array_column($candidatesArray, 'participantID'));
+        //dd(array_unique($participants));
+        // foreach($participantIDs as $participantID){
+        //     $participants[] = User::find($participantID);
+        // }
+
+        if($start->year==$end->year){
+            $betweenMonths=$end->month-$start->month+1;
+        }else{
+            $betweenMonths=(12-$start->month+1)+
+            12*($end->year-($start->year+1))+
+            $end->month;
+        }
+        $j=0;
+        while($j<$betweenMonths){
+            $calendars[] = calendar(new Carbon($start->format('Y-m-d')));
+            $start->modify('+1 month');
+            $j=$j+1;
+        }
+        $start1 = new Carbon($exp->start);
+
+        return view('portfolio1.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates','participants' , 'calendars', 'start1'));
     }
 }
