@@ -23,6 +23,7 @@ class Portfolio1ParController extends Controller
             ->join('labs', 'portfolio1s.labID', '=', 'labs.id')
             ->select('portfolio1s.*', 'labs.prof',)
             ->get();
+        //dd(88);
 
         $participant = Auth::user();
 
@@ -31,15 +32,20 @@ class Portfolio1ParController extends Controller
             ->where('participantID', $participant->id)
             ->get();
 
-        //DBからとってきたObject型のexpIDsから
-        //要素を一つずつ取り出して配列に格納
-        foreach ($expIDs as $value) {
-            $expIDsArrays[] = $value;
+        if ($expIDs->isEmpty()) {
+            $expIDsArray = [];
+        } else {
+            //DBからとってきたObject型のexpIDsから
+            //要素を一つずつ取り出して配列に格納
+            foreach ($expIDs as $expID) {
+                $expIDsArrays[] = $expID;
+            }
+            //格納した配列は行ごとにフィールドをキーにした
+            //連想配列になっているからただのインデックスに
+            //変える
+            $expIDsArray = array_column($expIDsArrays, 'expID');
+            //dd(88);
         }
-        //格納した配列は行ごとにフィールドをキーにした
-        //連想配列になっているからただのインデックスに
-        //変える
-        $expIDsArray = array_column($expIDsArrays, 'expID');
 
         return view('portfolio1par.index', compact('exps', 'participant', 'expIDsArray'));
     }
@@ -67,12 +73,12 @@ class Portfolio1ParController extends Controller
         $exp = Portfolio1::find($id);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
-        if($start->year==$end->year){
-            $betweenMonths=$end->month-$start->month+1;
-        }else{
-            $betweenMonths=(12-$start->month+1)+
-            12*($end->year-($start->year+1))+
-            $end->month;
+        if ($start->year == $end->year) {
+            $betweenMonths = $end->month - $start->month + 1;
+        } else {
+            $betweenMonths = (12 - $start->month + 1) +
+                12 * ($end->year - ($start->year + 1)) +
+                $end->month;
         }
         //$calendar = calendar($date->firstOfMonth());
         // $calendarstart=calendar($start);
@@ -80,10 +86,10 @@ class Portfolio1ParController extends Controller
 
         //$calendar = calendar($start);
         $calendars[] = calendar($start);
-        $j=0;
-        while($j<$betweenMonths-1){
-            $calendars[]=calendar($end->modify('-1 month')->firstOfMonth());
-            $j=$j+1;
+        $j = 0;
+        while ($j < $betweenMonths - 1) {
+            $calendars[] = calendar($end->modify('-1 month')->firstOfMonth());
+            $j = $j + 1;
         }
         // if($calendarstart==$calendarend){
         //     dd($calendars);

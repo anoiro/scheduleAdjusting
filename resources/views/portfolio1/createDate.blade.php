@@ -37,13 +37,13 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('portfolio1.storeDate') }}">
                         @csrf
                         研究室
                         <input type="radio" name="labID" value='{{ $lab->id }}'>{{ $lab->prof }}研究室
                         <br>
                         実験名
-                        <input type="radio" name="expName" value='{{ $exp->expName }}'>{{ $exp->expName }}
+                        <input type="radio" name="expID" value='{{ $exp->id }}'>{{ $exp->expName }}
                         <br>
                         実験風景
                         <input type="radio" name="imageID" value='{{ $img->id }}'>
@@ -123,28 +123,28 @@
                                                 <br>
                                                 @foreach($candidates as $candidate)
                                                 @if($day->modify('+8 hours')->modify('+40 minutes')==$candidate->datetime)
-                                                <label><input type="checkbox" name="confirms[]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の1コマ</label>
+                                                <label><input type="radio" name="confirms[{{ $candidate->participantID }}][]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の1コマ</label>
                                                 <br>
                                                 @elseif($day->modify('+10 hours')->modify('+20 minutes')==$candidate->datetime)
-                                                <label><input type="checkbox" name="confirms[]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の2コマ</label>
+                                                <label><input type="radio" name="confirms[{{ $candidate->participantID }}][]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の2コマ</label>
                                                 <br>
                                                 @elseif($day->modify('+12 hours')->modify('+45 minutes')==$candidate->datetime)
-                                                <label><input type="checkbox" name="confirms[]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の3コマ</label>
+                                                <label><input type="radio" name="confirms[{{ $candidate->participantID }}][]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の3コマ</label>
                                                 <br>
                                                 @elseif($day->modify('+14 hours')->modify('+25 minutes')==$candidate->datetime)
-                                                <label><input type="checkbox" name="confirms[]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の4コマ</label>
+                                                <label><input type="radio" name="confirms[{{ $candidate->participantID }}][]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の4コマ</label>
                                                 <br>
                                                 @elseif($day->modify('+16 hours')->modify('+5 minutes')==$candidate->datetime)
-                                                <label><input type="checkbox" name="confirms[]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の5コマ</label>
+                                                <label><input type="radio" name="confirms[{{ $candidate->participantID }}][]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の5コマ</label>
                                                 <br>
                                                 @elseif($day->modify('+18 hours')==$candidate->datetime)
-                                                <label><input type="checkbox" name="confirms[]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の18:00~19:00</label>
+                                                <label><input type="radio" name="confirms[{{ $candidate->participantID }}][]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の18:00~19:00</label>
                                                 <br>
                                                 @elseif($day->modify('+18 hours')->modify('+30 minutes')==$candidate->datetime)
-                                                <label><input type="checkbox" name="confirms[]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の18:30~19:30</label>
+                                                <label><input type="radio" name="confirms[{{ $candidate->participantID }}][]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の18:30~19:30</label>
                                                 <br>
                                                 @elseif($day->modify('+19 hours')==$candidate->datetime)
-                                                <label><input type="checkbox" name="confirms[]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の19:00~20:00</label>
+                                                <label><input type="radio" name="confirms[{{ $candidate->participantID }}][]" value="{{ $candidate->id }}">{{ $participants[$candidate->participantID]->studentNumber }}<br>の19:00~20:00</label>
                                                 <br>
                                                 @endif
                                                 @endforeach

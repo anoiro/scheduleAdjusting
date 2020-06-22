@@ -117,7 +117,7 @@ Route::group(['prefix' => 'portfolio1', 'middleware' => 'auth:exper'], function 
     //storeImg
     Route::post('storeImg','Portfolio1Controller@storeImg')->name('portfolio1.storeImg');
     //createDate
-    Route::get('createDate','Portfolio1Controller@createDate')->name('portfolio1.createDate');
+    Route::get('createDate/{id}','Portfolio1Controller@createDate')->name('portfolio1.createDate');
     //storeDate
     Route::post('storeDate','Portfolio1Controller@storeDate')->name('portfolio1.storeDate');
 });

@@ -14,6 +14,12 @@
     .box-body {
         text-align: center;
     }
+
+    .btn-success {
+        border-color: #FF6600;
+        background: #FF6600;
+        color: #FFFFFF;
+    }
 </style>
 
 <div class="container">
@@ -25,13 +31,8 @@
                         実験新規登録
                     </button>
                 </form>
-                <form method='GET' action="{{ route('portfolio1.createDate') }}">
-                    <button type='submit' class='btn btn-success'>
-                        参加者一覧
-                    </button>
-                </form>
                 <form method='GET' action="{{ route('portfolio1.createImg') }}">
-                    <button type='submit' class='btn btn-secondary'>
+                    <button type='submit' class='btn btn-success'>
                         実験風景画像登録
                     </button>
                 </form>
@@ -54,7 +55,7 @@
                             <td>{{ $exp->start }}</td>
                             <td>{{ $exp->end }}</td>
                             <td>{{ $exp->expName }}</td>
-                            <td>{{ $exp->prof }}研究室</td>
+                            <td @if($exp->labID===$experimenter->labID) style="background-color:#FF6600; color:#ffffff;" @endif>{{ $exp->prof }}研究室</td>
                             <td>{{ $exp->recruit }}</td>
                             <td>{{ $exp->thanks }}</td>
                             <td>{{ $exp->room }}</td>

@@ -44,6 +44,13 @@
                         @csrf
                         <input class="btn btn-info" type="submit" value="変更する">
                     </form>
+                    @if(($lab->id===$experimenter->labID) and ($candidateCount!=0))
+                    <form method='GET' action="{{ route('portfolio1.createDate', ['id'=>$exp->id]) }}">
+                        <button type='submit' class='btn btn-success'>
+                            参加者一覧
+                        </button>
+                    </form>
+                    @endif
                     <form method="POST" action="{{ route('portfolio1.destroy', ['id'=>$exp->id]) }}" id="delete_{{ $exp->id }}">
                         @csrf
                         <a href="#" class="btn btn-danger" data-id="{{ $exp->id }}" onclick="deletePost(this);">削除する</a>
@@ -55,10 +62,10 @@
 </div>
 
 <script>
-    function deletePost(e){
+    function deletePost(e) {
         'use strict';
-        if(confirm('本当に削除していいですか?')){
-            document.getElementById('delete_'+e.dataset.id).submit();
+        if (confirm('本当に削除していいですか?')) {
+            document.getElementById('delete_' + e.dataset.id).submit();
         }
     }
 </script>

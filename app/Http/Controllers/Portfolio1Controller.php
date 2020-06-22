@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\candidate;
 use Illuminate\Http\Request;
 
 use App\Models\Portfolio1;
 use App\Models\Image;
+use App\Models\Confirm;
 use App\Models\Experimenter;
 use App\Models\Lab;
 use Auth;
@@ -21,8 +23,9 @@ class Portfolio1Controller extends Controller
             ->join('labs', 'portfolio1s.labID', '=', 'labs.id')
             ->select('portfolio1s.*', 'labs.prof',)
             ->get();
+        $experimenter = Experimenter::find(Auth::id());
 
-        return view('portfolio1.index', compact('exps'));
+        return view('portfolio1.index', compact('exps', 'experimenter'));
     }
 
     /**
@@ -90,8 +93,12 @@ class Portfolio1Controller extends Controller
             ->select('id', 'prof')
             ->where('labs.id', $exp->labID)
             ->get();
+        $experimenter = Experimenter::find(Auth::id());
+        $candidateCount = DB::table('candidates')
+            ->where('expID', $exp->id)
+            ->count();
 
-        return view('portfolio1.show', compact('exp', 'img', 'labs'));
+        return view('portfolio1.show', compact('exp', 'img', 'labs', 'experimenter', 'candidateCount'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -203,13 +210,11 @@ class Portfolio1Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createDate()
+    public function createDate($expID)
     {
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
-        $exp = DB::table('portfolio1s')
-            ->where('labID', $lab->id)
-            ->first();
+        $exp = Portfolio1::find($expID);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
 
@@ -224,28 +229,41 @@ class Portfolio1Controller extends Controller
         }
         //$participants = array_unique($nonUniParticipants);
         $dates = array_column($candidatesArray, 'datetime');
-        
-        $participantIDs = array_unique(array_column($candidatesArray, 'participantID'));
-        //dd(array_unique($participants));
-        // foreach($participantIDs as $participantID){
-        //     $participants[] = User::find($participantID);
-        // }
 
-        if($start->year==$end->year){
-            $betweenMonths=$end->month-$start->month+1;
-        }else{
-            $betweenMonths=(12-$start->month+1)+
-            12*($end->year-($start->year+1))+
-            $end->month;
+        $participantIDs = array_unique(array_column($candidatesArray, 'participantID'));
+
+        if ($start->year == $end->year) {
+            $betweenMonths = $end->month - $start->month + 1;
+        } else {
+            $betweenMonths = (12 - $start->month + 1) +
+                12 * ($end->year - ($start->year + 1)) +
+                $end->month;
         }
-        $j=0;
-        while($j<$betweenMonths){
+        $j = 0;
+        while ($j < $betweenMonths) {
             $calendars[] = calendar(new Carbon($start->format('Y-m-d')));
             $start->modify('+1 month');
-            $j=$j+1;
+            $j = $j + 1;
         }
         $start1 = new Carbon($exp->start);
 
-        return view('portfolio1.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates','participants' , 'calendars', 'start1'));
+        return view('portfolio1.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates', 'participants', 'calendars', 'start1'));
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeDate(Request $request)
+    {
+        foreach(array_keys($request->input('confirms')) as $participantID){
+            $confirm = new Confirm;
+            $confirm->expID = $request->input('expID');
+            $confirm->participantID = $participantID;
+            $confirm->datetime = Candidate::find($request->input('confirms')[$participantID][0])->datetime;
+            $confirm->save();
+        }
+        return redirect('portfolio1/index');
     }
 }
