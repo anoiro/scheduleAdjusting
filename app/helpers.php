@@ -2,7 +2,10 @@
 
 use Carbon\CarbonImmutable;
 
-function dates($month)
+/**
+ * 一か月分の日付リストを返す
+ */
+function dates(CarbonImmutable $month)
     {
         $dates = [];
         
