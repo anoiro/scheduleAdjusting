@@ -28,28 +28,32 @@
                         @csrf
                         学籍番号
                         <br>
+                        <label><input type="radio" name="studentNumber" value="{{ $participant->studentNumber }}">{{ $participant->studentNumber }}</input>
                         <br>
                         <br>
                         氏名
                         <br>
-                        <input type="radio" name="name" value="{{ $participant->name }}" checked>{{ $participant->name }}</input>
+                        <label><input type="radio" name="name" value="{{ $participant->name }}">{{ $participant->name }}</input>
                         <br>
                         <br>
                         性別
                         <br>
+                        <label><input type="radio" name="gender" value="{{ $participant->gender }}">{{ $participant->gender }}</input>
                         <br>
                         <br>
                         年齢
                         <br>
+                        <label><input type="radio" name="age" value="{{ $participant->age }}">{{ $participant->age }}歳</input>
+                        <br>
                         <br>
                         メールアドレス
                         <br>
-                        <input type="radio" name="email" value="{{ $participant->email }}" checked>{{ $participant->email }}</input>
+                        <label><input type="radio" name="email" value="{{ $participant->email }}">{{ $participant->email }}</input>
                         <br>
                         <br>
                         実験名
                         <br>
-                        <input type="radio" name="expID" value="{{ $exp->id }}" checked>{{ $exp->expName }}</input>
+                        <label><input type="radio" name="expID" value="{{ $exp->id }}" checked>{{ $exp->expName }}</input></label>
                         <br>
                         <br>
 
@@ -102,21 +106,21 @@
                                             <span class="other">{{ $day->day }}</span>
                                             @endif
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+8 hours')->modify('+40 minutes') }}" @if(in_array($day->modify('+8 hours')->modify('+40 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>1コマ
+                                            <label><input type="checkbox" name="candidate[]" value="{{ $day->modify('+8 hours')->modify('+40 minutes') }}" @if(in_array($day->modify('+8 hours')->modify('+40 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>1コマ</label>
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+10 hours')->modify('+20 minutes') }}" @if(in_array($day->modify('+10 hours')->modify('+20 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>2コマ
+                                            <label><input type="checkbox" name="candidate[]" value="{{ $day->modify('+10 hours')->modify('+20 minutes') }}" @if(in_array($day->modify('+10 hours')->modify('+20 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>2コマ</label>
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+12 hours')->modify('+45 minutes') }}" @if(in_array($day->modify('+12 hours')->modify('+45 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>3コマ
+                                            <label><input type="checkbox" name="candidate[]" value="{{ $day->modify('+12 hours')->modify('+45 minutes') }}" @if(in_array($day->modify('+12 hours')->modify('+45 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>3コマ</label>
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+14 hours')->modify('+25 minutes') }}" @if(in_array($day->modify('+14 hours')->modify('+25 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>4コマ
+                                            <label><input type="checkbox" name="candidate[]" value="{{ $day->modify('+14 hours')->modify('+25 minutes') }}" @if(in_array($day->modify('+14 hours')->modify('+25 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>4コマ</label>
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+16 hours')->modify('+5 minutes') }}" @if(in_array($day->modify('+16 hours')->modify('+5 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>5コマ
+                                            <label><input type="checkbox" name="candidate[]" value="{{ $day->modify('+16 hours')->modify('+5 minutes') }}" @if(in_array($day->modify('+16 hours')->modify('+5 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>5コマ</label>
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+18 hours') }}" @if(in_array($day->modify('+18 hours')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>18:00～19:00
+                                            <label><input type="checkbox" name="candidate[]" value="{{ $day->modify('+18 hours') }}" @if(in_array($day->modify('+18 hours')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>18:00～19:00</label>
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+18 hours')->modify('+30 minutes') }}" @if(in_array($day->modify('+18 hours')->modify('+30 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>18:30～19:30
+                                            <label><input type="checkbox" name="candidate[]" value="{{ $day->modify('+18 hours')->modify('+30 minutes') }}" @if(in_array($day->modify('+18 hours')->modify('+30 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>18:30～19:30</label>
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+19 hours') }}" @if(in_array($day->modify('+19 hours')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>19:00～20:00
+                                            <label><input type="checkbox" name="candidate[]" value="{{ $day->modify('+19 hours') }}" @if(in_array($day->modify('+19 hours')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>19:00～20:00</label>
                                             <br>
                                         </div>
                                     </td>
@@ -125,7 +129,7 @@
                                 @endforeach
                             </table>
                         </div>
-                        <input type="checkbox" name="caution" value="1">注意事項に同意する
+                        <label><input type="checkbox" name="caution" value="1">注意事項に同意する</label>
                         <br>
                         <input class="btn btn-info" type="submit" value="変更する">
                     </form>
