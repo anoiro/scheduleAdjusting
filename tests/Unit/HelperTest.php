@@ -16,9 +16,8 @@ class HelperTest extends TestCase
      */
     public function test_dates()
     {
-        $input=CarbonImmutable::createFromFormat('Y-m-d', '2020-06-23');
-        $actual=dates($input);
-
+        $input = CarbonImmutable::createFromFormat('Y-m-d', '2020-06-23');
+        $actual = dates($input);
         $this->assertCount(35, $actual);
         $this->assertEquals('2020-05-31', $actual[0]->format('Y-m-d'));
         $this->assertEquals('2020-07-04', $actual[34]->format('Y-m-d'));
@@ -30,17 +29,19 @@ class HelperTest extends TestCase
      */
     public function test_calendar()
     {
-        $input=CarbonImmutable::createFromFormat('Y-m-d', '2020-06-23');
-        $actual=calendar($input);
+        $input = CarbonImmutable::createFromFormat('Y-m-d', '2020-06-23');
+        $actual = calendar($input);
 
         //マジック定数。文字列のクラス名を返す
         $this->assertInstanceOf(Generator::class, $actual);
 
-        $array=iterator_to_array($actual);
+        $array = iterator_to_array($actual);
         $this->assertCount(5, $array);
 
-        foreach($array as $a){
+        foreach ($array as $a) {
             $this->assertCount(7, $a);
         }
+        //副作用　参照透明　php-cs-fixer psr1 psr2 psr12 
+        //tdd テスト駆動開発
     }
 }

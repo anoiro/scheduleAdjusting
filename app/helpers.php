@@ -1,11 +1,12 @@
 <?php
 
+use Carbon\CarbonInterface;
 use Carbon\CarbonImmutable;
 
 /**
  * 一か月分の日付リストを返す
  */
-function dates(CarbonImmutable $month)
+function dates(CarbonInterface $month)
 {
     $dates = [];
 
@@ -42,7 +43,7 @@ function dates(CarbonImmutable $month)
 /**
  * 一か月分の日付リストを一週間ごとにリスト化する
  */
-function calendar(CarbonImmutable $month)
+function calendar(CarbonInterface $month)
 {
     $week = [];
     //該当する月$monthのカレンダーで表示する用の配列を得る
