@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     // Userのリダイレクト先
-    public const HOME = '/user/home';
+    //public const HOME = '/user/home';
+    public const HOME = '/user/index';
 
     // Experのリダイレクト先
-    public const EXPER_HOME = '/exper/home';
+    //public const EXPER_HOME = '/exper/home';
+    public const EXPER_HOME = '/exper/index';
 
     /**
      * This namespace is applied to your controller routes.

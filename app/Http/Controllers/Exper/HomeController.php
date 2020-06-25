@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        //dd(11);
-        return view('exper.home');
+        //return view('exper.home');
+        return view('exper.index');
     }
 }

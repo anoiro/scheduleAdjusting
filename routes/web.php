@@ -59,12 +59,12 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function () {
     // ログイン認証後
     Route::middleware('auth:user')->group(function () {
         // TOPページ
-        Route::resource('home', 'HomeController', ['only' => 'index']);
+        //Route::resource('home', 'HomeController', ['only' => 'index']);
+        Route::resource('index', 'Portfolio1ParController@index');
     });
 });
 //Experimenter
 Route::namespace('Exper')->prefix('exper')->name('exper.')->group(function () {
-    //print(100);
     // ログイン認証関連
     Auth::routes([
         'register' => true,
@@ -74,12 +74,18 @@ Route::namespace('Exper')->prefix('exper')->name('exper.')->group(function () {
     // ログイン認証後
     Route::middleware('auth:exper')->group(function () {
         // TOPページ
-        Route::resource('home', 'HomeController', ['only' => 'index']);
+        //Route::resource('home', 'HomeController', ['only' => 'index']);
+        Route::resource('index', 'Portfolio1Controller@index');
     });
 });
 
+// Route::group(['prefix' => 'exper', 'middleware' => 'auth:exper'], function () {
+//     //index
+//     Route::get('index', 'Portfolio1Controller@index')->name('portfolio1.index');
+// });
+
 //Participant用のページ
-Route::group(['prefix' => 'portfolio1par', 'middleware' => 'auth:user'], function () {
+Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function () {
     //index
     Route::get('index', 'Portfolio1ParController@index')->name('portfolio1par.index');
     //create
@@ -97,7 +103,7 @@ Route::group(['prefix' => 'portfolio1par', 'middleware' => 'auth:user'], functio
 });
 
 //Experimeter用のページ
-Route::group(['prefix' => 'portfolio1', 'middleware' => 'auth:exper'], function () {
+Route::group(['prefix' => 'exper', 'middleware' => 'auth:exper'], function () {
     //index
     Route::get('index', 'Portfolio1Controller@index')->name('portfolio1.index');
     //create
@@ -113,13 +119,13 @@ Route::group(['prefix' => 'portfolio1', 'middleware' => 'auth:exper'], function 
     //destroy
     Route::post('destroy/{id}', 'Portfolio1Controller@destroy')->name('portfolio1.destroy');
     //createImg
-    Route::get('createImg','Portfolio1Controller@createImg')->name('portfolio1.createImg');
+    Route::get('createImg', 'Portfolio1Controller@createImg')->name('portfolio1.createImg');
     //storeImg
-    Route::post('storeImg','Portfolio1Controller@storeImg')->name('portfolio1.storeImg');
+    Route::post('storeImg', 'Portfolio1Controller@storeImg')->name('portfolio1.storeImg');
     //createDate
-    Route::get('createDate/{id}','Portfolio1Controller@createDate')->name('portfolio1.createDate');
+    Route::get('createDate/{id}', 'Portfolio1Controller@createDate')->name('portfolio1.createDate');
     //storeDate
-    Route::post('storeDate','Portfolio1Controller@storeDate')->name('portfolio1.storeDate');
+    Route::post('storeDate', 'Portfolio1Controller@storeDate')->name('portfolio1.storeDate');
 });
 
 Auth::routes();

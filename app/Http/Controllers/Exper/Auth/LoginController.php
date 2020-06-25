@@ -13,7 +13,7 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     protected $redirectTo = RouteServiceProvider::EXPER_HOME;
-
+    
     public function __construct()
     {
         $this->middleware('guest:exper')->except('logout');
