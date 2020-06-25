@@ -28,6 +28,7 @@
                         @csrf
                         学籍番号
                         <br>
+                        <input type="radio" name="studentNumber" value="{{ $participant->studentNumber }}">{{ $participant->studentNumber }}</input>
                         <br>
                         <br>
                         氏名
@@ -37,9 +38,12 @@
                         <br>
                         性別
                         <br>
+                        <input type="radio" name="gender" value="{{ $participant->gender }}">{{ $participant->gender }}</input>
                         <br>
                         <br>
                         年齢
+                        <br>
+                        <input type="radio" name="age" value="{{ $participant->age }}">{{ $participant->age }}歳</input>
                         <br>
                         <br>
                         メールアドレス

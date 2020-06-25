@@ -102,7 +102,7 @@
                                             <span class="other">{{ $day->day }}</span>
                                             @endif
                                             <br>
-                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+8 hours')->modify('+40 minutes') }}" @if(in_array($day->modify('+8 hours')->modify('+40 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif disabled='disabled'>1コマ
+                                            <input type="checkbox" name="candidate[]" value="{{ $day->modify('+8 hours')->modify('+40 minutes') }}" @if(in_array($day->modify('+8 hours')->modify('+40 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>1コマ
                                             <br>
                                             <input type="checkbox" name="candidate[]" value="{{ $day->modify('+10 hours')->modify('+20 minutes') }}" @if(in_array($day->modify('+10 hours')->modify('+20 minutes')->format('Y-m-d H:i:s'),$datetimes,true)) checked @endif>2コマ
                                             <br>
