@@ -79,11 +79,6 @@ Route::namespace('Exper')->prefix('exper')->name('exper.')->group(function () {
     });
 });
 
-// Route::group(['prefix' => 'exper', 'middleware' => 'auth:exper'], function () {
-//     //index
-//     Route::get('index', 'Portfolio1Controller@index')->name('portfolio1.index');
-// });
-
 //Participant用のページ
 Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function () {
     //index
