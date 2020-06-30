@@ -16,8 +16,8 @@ class CreatePortfolio1sTable extends Migration
         Schema::create('portfolio1s', function (Blueprint $table) {
             $table->bigIncrements('id'); #実験ID
             $table->bigInteger('labID'); #研究室ID
-            $table->string('name',255); #実験名
-            $table->bigInteger('imgID')->nullable(); #実験風景画像ID
+            $table->string('expName',255); #実験名
+            $table->bigInteger('imageID')->nullable(); #実験風景画像ID
             $table->date('start'); #開始日
             $table->date('end'); #終了予定日
             $table->bigInteger('recruit'); #募集人数
