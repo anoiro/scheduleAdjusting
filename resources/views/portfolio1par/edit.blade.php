@@ -28,27 +28,27 @@
                         @csrf
                         学籍番号
                         <br>
-                        <label><input type="radio" name="studentNumber" value="{{ $participant->studentNumber }}">{{ $participant->studentNumber }}</input>
+                        <label><input type="radio" name="studentNumber" value="{{ $participant->studentNumber }}" checked>{{ $participant->studentNumber }}</input>
                         <br>
                         <br>
                         氏名
                         <br>
-                        <label><input type="radio" name="name" value="{{ $participant->name }}">{{ $participant->name }}</input>
+                        <label><input type="radio" name="name" value="{{ $participant->name }}" checked>{{ $participant->name }}</input>
                         <br>
                         <br>
                         性別
                         <br>
-                        <label><input type="radio" name="gender" value="{{ $participant->gender }}">{{ $participant->gender }}</input>
+                        <label><input type="radio" name="gender" value="{{ $participant->gender }}" checked>{{ $participant->gender }}</input>
                         <br>
                         <br>
                         年齢
                         <br>
-                        <label><input type="radio" name="age" value="{{ $participant->age }}">{{ $participant->age }}歳</input>
+                        <label><input type="radio" name="age" value="{{ $participant->age }}" checked>{{ $participant->age }}歳</input>
                         <br>
                         <br>
                         メールアドレス
                         <br>
-                        <label><input type="radio" name="email" value="{{ $participant->email }}">{{ $participant->email }}</input>
+                        <label><input type="radio" name="email" value="{{ $participant->email }}" checked>{{ $participant->email }}</input>
                         <br>
                         <br>
                         実験名
