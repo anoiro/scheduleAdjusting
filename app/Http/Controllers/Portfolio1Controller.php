@@ -189,11 +189,11 @@ class Portfolio1Controller extends Controller
      */
     public function storeImg(Request $request)
     {
-        dd(88);
         $image = new Image;
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
         $image->img = file_get_contents($_FILES['img']['tmp_name']);
+        dd(88);
         $image->save();
 
         $exp = Portfolio1::find($request->input('expID'));
