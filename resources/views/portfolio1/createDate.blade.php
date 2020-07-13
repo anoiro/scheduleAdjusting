@@ -40,7 +40,6 @@
                     <form method="POST" action="{{ route('portfolio1.storeDate') }}">
                         @csrf
                         研究室
-                        @dd(88)
                         <input type="radio" name="labID" value='{{ $lab->id }}'>{{ $lab->prof }}研究室
                         <br>
                         実験名
@@ -73,6 +72,7 @@
                         休日の募集
                         <input type="radio" name="weekend" value="{{ $exp->weekend }}">@if($exp->weekend===1) 土日も募集する @else 土日は募集しない @endif
                         <br>
+                        @dd(99)
 
                         <?php foreach ($calendars as $calendar) : ?>
                             <div class="calender">
