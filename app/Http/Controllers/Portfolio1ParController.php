@@ -193,7 +193,7 @@ class Portfolio1ParController extends Controller
                 $deletingDate->delete();
             }
         }
-        return redirect('portfolio1par/index');
+        return redirect('user/index');
     }
     /**
      * Remove the specified resource from storage.
@@ -211,6 +211,6 @@ class Portfolio1ParController extends Controller
             $candidate = Candidate::find($deletingDate->id);
             $candidate->delete();
         }
-        return redirect('portfolio1par/index');
+        return redirect('user/index');
     }
 }
