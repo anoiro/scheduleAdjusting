@@ -23,7 +23,7 @@ class CreatePortfolio1sTable extends Migration
             $table->bigInteger('recruit'); #募集人数
             $table->bigInteger('thanks'); #礼金
             $table->string('room',100); #会場
-            $table->boolean('weekend'); #土日も募集するか。0が非募集。1が募集
+            $table->boolean('weekend')->nullable($value=true); #土日も募集するか。0が非募集。1が募集
             $table->rememberToken();
             $table->timestamps();
         });
