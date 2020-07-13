@@ -124,7 +124,7 @@ class Portfolio1ParController extends Controller
             $candiDate->save();
         }
 
-        return redirect('portfolio1par/index');
+        return redirect('user/index');
     }
     /**
      * Show the form for editing the specified resource.
