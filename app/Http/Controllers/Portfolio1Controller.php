@@ -65,18 +65,19 @@ class Portfolio1Controller extends Controller
         $portfolio1->save();
 
         //画像
-        $image = new Image;
-        $image->labID = $portfolio1->labID;
-        $image->expID = $portfolio1->id;
-        $image->expID = '20';
-        $image->img = file_get_contents($_FILES['img']['tmp_name']);
-        $image->save();
+        if ($_FILES['img']['tmp_name'] != null) {
+            $image = new Image;
+            $image->labID = $portfolio1->labID;
+            $image->expID = $portfolio1->id;
+            $image->img = file_get_contents($_FILES['img']['tmp_name']);
+            $image->save();
 
-        //実験テーブルの画像IDを登録
-        $portfolio1->imageID = $image->id;
-        $portfolio1->save();
+            //実験テーブルの画像IDを登録
+            $portfolio1->imageID = $image->id;
+            $portfolio1->save();
+        }
 
-        return redirect('portfolio1/index');
+        return redirect('exper/index');
     }
 
     /**
@@ -148,7 +149,7 @@ class Portfolio1Controller extends Controller
         //上で代入した値たちを保存する
         $portfolio1->save();
         //indexページに飛ばすheaderみたいな感じかな
-        return redirect('portfolio1/index');
+        return redirect('exper/index');
     }
     /**
      * Remove the specified resource from storage.
@@ -161,7 +162,7 @@ class Portfolio1Controller extends Controller
         $portfolio1 = Portfolio1::find($id);
         $portfolio1->delete();
 
-        return redirect('portfolio1/index');
+        return redirect('exper/index');
     }
 
     /**
@@ -201,9 +202,13 @@ class Portfolio1Controller extends Controller
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
         $image->img = file_get_contents($_FILES['img']['tmp_name']);
-
         $image->save();
-        return redirect('portfolio1/index');
+
+        $exp = Portfolio1::find($request->input('expID'));
+        $exp->imageID = $image->id;
+        $exp->save();
+
+        return redirect('exper/index');
     }
     /**
      * Show the form for creating a new resource.
@@ -257,13 +262,13 @@ class Portfolio1Controller extends Controller
      */
     public function storeDate(Request $request)
     {
-        foreach(array_keys($request->input('confirms')) as $participantID){
+        foreach (array_keys($request->input('confirms')) as $participantID) {
             $confirm = new Confirm;
             $confirm->expID = $request->input('expID');
             $confirm->participantID = $participantID;
             $confirm->datetime = Candidate::find($request->input('confirms')[$participantID][0])->datetime;
             $confirm->save();
         }
-        return redirect('portfolio1/index');
+        return redirect('exper/index');
     }
 }

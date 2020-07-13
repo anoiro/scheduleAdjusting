@@ -17,7 +17,7 @@ class CreatePortfolio1sTable extends Migration
             $table->bigIncrements('id'); #実験ID
             $table->bigInteger('labID'); #研究室ID
             $table->string('expName',255); #実験名
-            $table->bigInteger('imageID')->nullable(); #実験風景画像ID
+            $table->bigInteger('imageID')->nullable($value=true); #実験風景画像ID
             $table->date('start'); #開始日
             $table->date('end'); #終了予定日
             $table->bigInteger('recruit'); #募集人数
