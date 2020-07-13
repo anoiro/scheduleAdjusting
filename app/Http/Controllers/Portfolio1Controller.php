@@ -215,7 +215,7 @@ class Portfolio1Controller extends Controller
         $end = new Carbon($exp->end);
 
         $img = Image::find($exp->imageID);
-        dd($img->id);
+        dd(100);
         $candidates = DB::table('candidates')
             ->where('expID', $exp->id)
             ->get();
