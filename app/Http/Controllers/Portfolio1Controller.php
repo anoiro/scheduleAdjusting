@@ -213,7 +213,6 @@ class Portfolio1Controller extends Controller
         $exp = Portfolio1::find($expID);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
-        dd(99);
 
         $img = Image::find($exp->imageID);
         $candidates = DB::table('candidates')
@@ -243,6 +242,7 @@ class Portfolio1Controller extends Controller
             $j = $j + 1;
         }
         $start1 = new Carbon($exp->start);
+        dd(100);
 
         return view('portfolio1.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates', 'participants', 'calendars', 'start1'));
     }
