@@ -193,9 +193,9 @@ class Portfolio1Controller extends Controller
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
         $image->img = file_get_contents($_FILES['img']['tmp_name']);
-        dd(88);
         $image->save();
 
+        dd(88);
         $exp = Portfolio1::find($request->input('expID'));
         $exp->imageID = $image->id;
         $exp->save();
