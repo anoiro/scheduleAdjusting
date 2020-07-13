@@ -48,6 +48,7 @@
                         実験風景
                         <input type="radio" name="imageID" value='{{ $img->id }}'>
                         <br>
+                        @dd(99)
                         @if($img!=null)
                         <div>
                             <img src='data:img/jpg;base64,<?php print(base64_encode($img->img)); ?>' style="width: 50%; height: auto;" />
@@ -57,7 +58,6 @@
                         開始日
                         <input type="radio" name="start" value="{{ $exp->start }}">{{ $exp->start }}
                         <br>
-                        @dd(99)
                         終了予定日
                         <input type="radio" name="end" value="{{ $exp->end }}">{{ $exp->end }}
                         <br>
