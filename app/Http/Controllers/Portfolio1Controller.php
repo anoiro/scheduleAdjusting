@@ -208,12 +208,12 @@ class Portfolio1Controller extends Controller
      */
     public function createDate($expID)
     {
-        dd(88);
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
         $exp = Portfolio1::find($expID);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
+        dd(88);
 
         $img = Image::find($exp->imageID);
         $candidates = DB::table('candidates')
