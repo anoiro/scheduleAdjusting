@@ -49,9 +49,9 @@
                         <input type="number" name="recruit" value="{{ $exp->recruit }}">
                         <br>
                         お礼
-                        <input type="radio" name="thanks" value="500" @if(($exp->thanks)==='500') checked @endif>500円/時
-                        <input type="radio" name="thanks" value="1000" @if(($exp->thanks)==='1000') checked @endif>1,000円/時
-                        <input type="radio" name="thanks" value="0" @if(($exp->thanks)==='0') checked @endif>その他
+                        <input type="radio" name="thanks" value="500" @if(($exp->thanks)=='500') checked @endif>500円/時
+                        <input type="radio" name="thanks" value="1000" @if(($exp->thanks)=='1000') checked @endif>1,000円/時
+                        <input type="radio" name="thanks" value="0" @if(($exp->thanks)=='0') checked @endif>その他
                         <br>
                         会場
                         <input type="text" name="room" value="{{ $exp->room }}">
