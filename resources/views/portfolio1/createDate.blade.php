@@ -45,7 +45,6 @@
                         実験名
                         <input type="radio" name="expID" value='{{ $exp->id }}'>{{ $exp->expName }}
                         <br>
-                        @dd($img->id)
                         実験風景
                         <input type="radio" name="imageID" value='{{ $img->id }}'>
                         <br>
