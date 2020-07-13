@@ -40,6 +40,7 @@
                     <form method="POST" action="{{ route('portfolio1.storeDate') }}">
                         @csrf
                         研究室
+                        @dd(88)
                         <input type="radio" name="labID" value='{{ $lab->id }}'>{{ $lab->prof }}研究室
                         <br>
                         実験名
