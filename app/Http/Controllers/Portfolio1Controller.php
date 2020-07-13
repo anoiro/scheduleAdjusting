@@ -213,7 +213,7 @@ class Portfolio1Controller extends Controller
         $exp = Portfolio1::find($expID);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
-        dd(88);
+        dd(99);
 
         $img = Image::find($exp->imageID);
         $candidates = DB::table('candidates')
