@@ -45,10 +45,10 @@
                         実験名
                         <input type="radio" name="expID" value='{{ $exp->id }}'>{{ $exp->expName }}
                         <br>
+                        @dd(100)
                         実験風景
                         <input type="radio" name="imageID" value='{{ $img->id }}'>
                         <br>
-                        @dd(99)
                         @if($img!=null)
                         <div>
                             <img src='data:img/jpg;base64,<?php print(base64_encode($img->img)); ?>' style="width: 50%; height: auto;" />
