@@ -57,6 +57,7 @@
                         開始日
                         <input type="radio" name="start" value="{{ $exp->start }}">{{ $exp->start }}
                         <br>
+                        @dd(99)
                         終了予定日
                         <input type="radio" name="end" value="{{ $exp->end }}">{{ $exp->end }}
                         <br>
@@ -72,7 +73,6 @@
                         休日の募集
                         <input type="radio" name="weekend" value="{{ $exp->weekend }}">@if($exp->weekend===1) 土日も募集する @else 土日は募集しない @endif
                         <br>
-                        @dd(99)
 
                         <?php foreach ($calendars as $calendar) : ?>
                             <div class="calender">
