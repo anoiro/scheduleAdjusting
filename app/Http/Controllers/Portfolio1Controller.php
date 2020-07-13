@@ -172,22 +172,13 @@ class Portfolio1Controller extends Controller
      */
     public function createImg()
     {
-        $experimenter = DB::table('experimenters')
-            ->select() //experimenterが認証されたときのLabIDを取ってくる処理を追加したい
-            ->get();
-        $labs = DB::table('labs')
-            ->select('id', 'prof')
-            ->get();
-        //createImg()の引数に実験者のlabIDを
-        //取るようにしたい
-        //今は他の研究室がやっている実験の風景としても
-        //登録できる状態
+        $experimenter = Experimenter::find(Auth::id());
+        $lab = Lab::find($experimenter->labID);
         $exps = DB::table('portfolio1s')
-            ->select('id', 'labID', 'expName')
-            // ->where('labID',$labID)
+            ->where('labID',$lab->id)
             ->get();
 
-        return view('portfolio1.createImg', compact('labs', 'exps'));
+        return view('portfolio1.createImg', compact('experimenter', 'lab', 'exps'));
     }
 
     /**

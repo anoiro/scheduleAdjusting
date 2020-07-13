@@ -27,12 +27,7 @@
                     <form method="POST" action="{{ route('portfolio1.storeImg') }}" enctype="multipart/form-data">
                         @csrf
                         研究室
-                        <select name="labID">
-                            <option value="">選択してください</option>
-                            @foreach($labs as $lab)
-                            <option value="{{ $lab->id }}">{{ $lab->prof }}研究室</option>
-                            @endforeach
-                        </select>
+                        <input type="radio" name="labID" value='{{ $lab->id }}'>{{ $lab->prof }}研究室
                         <br>
 
                         実験名
