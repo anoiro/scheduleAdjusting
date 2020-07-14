@@ -17,8 +17,8 @@ class CreateImagesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('labID');
             $table->bigInteger('expID');
-            //$table->binary('img');
-            $table->text('img');
+            $table->binary('img');
+            // $table->text('img');
             $table->timestamps();
         });
     }
