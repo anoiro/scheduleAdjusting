@@ -37,6 +37,7 @@
                     @if($img!=null)
                     <div>
                         <img src='data:img/jpg;base64,<?php print(base64_encode($img->img)); ?>' style="width: 50%; height: auto;" />
+                        <img src="data:image/jpg;base64,<?= $img->img ?>" style="width: 50%; height: auto;" />
                     </div>
                     @endif
 
