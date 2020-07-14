@@ -195,7 +195,7 @@ class Portfolio1Controller extends Controller
         // dd(file_get_contents($request->img->getRealPath()));
         // dd($request->img->getRealPath());
         // $image->img = file_get_contents($_FILES['img']['tmp_name']);
-        $image->img = file_get_contents($request->img->getRealPath());
+        $image->img = base64_encode(file_get_contents($request->img->getRealPath()));
         // dd($_FILES['img']['tmp_name']);
         // $image->img->set_charset('utf8');
         // $image->img = mb_convert_encoding(file_get_contents($_FILES['img']['tmp_name']),"utf-8","sjis");
