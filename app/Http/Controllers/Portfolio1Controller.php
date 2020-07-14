@@ -193,6 +193,7 @@ class Portfolio1Controller extends Controller
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
         $image->img = file_get_contents($_FILES['img']['tmp_name']);
+        dd($_FILES['img']['tmp_name']);
         $image->img->set_charset('utf8');
         // $image->img = mb_convert_encoding(file_get_contents($_FILES['img']['tmp_name']),"utf-8","sjis");
         // dd(file_get_contents($_FILES['img']['tmp_name']));
