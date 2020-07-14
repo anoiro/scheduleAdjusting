@@ -192,6 +192,8 @@ class Portfolio1Controller extends Controller
         $image = new Image;
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
+        // dd(file_get_contents($request->img->getRealPath()));
+        dd($request->img->getRealPath());
         $image->img = file_get_contents($_FILES['img']['tmp_name']);
         // dd($_FILES['img']['tmp_name']);
         // $image->img->set_charset('utf8');
