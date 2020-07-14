@@ -69,7 +69,7 @@ class Portfolio1Controller extends Controller
             $image = new Image;
             $image->labID = $portfolio1->labID;
             $image->expID = $portfolio1->id;
-            $image->img = file_get_contents($_FILES['img']['tmp_name']);
+            $image->img = base64_encode(file_get_contents($request->img->getRealPath()));
             $image->save();
 
             //実験テーブルの画像IDを登録
@@ -192,21 +192,7 @@ class Portfolio1Controller extends Controller
         $image = new Image;
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
-        // dd(file_get_contents($request->img->getRealPath()));
-        // dd($request->img->getRealPath());
-        // $image->img = file_get_contents($_FILES['img']['tmp_name']);
         $image->img = base64_encode(file_get_contents($request->img->getRealPath()));
-        // dd($_FILES['img']['tmp_name']);
-        // $image->img->set_charset('utf8');
-        // $image->img = mb_convert_encoding(file_get_contents($_FILES['img']['tmp_name']),"utf-8","sjis");
-        // dd(file_get_contents($_FILES['img']['tmp_name']));
-        // dd(mb_convert_encoding(file_get_contents($_FILES['img']['tmp_name']),"utf-8","sjis"));
-
-        // $image3 = Image::find(22);
-        // dd($image3->img);
-        // dd(strcmp($image->img,$image3->img));
-        // $conn->set_charset('utf8');
-
         $image->save();
 
         $exp = Portfolio1::find($request->input('expID'));
