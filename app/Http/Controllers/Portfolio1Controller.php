@@ -192,10 +192,18 @@ class Portfolio1Controller extends Controller
         $image = new Image;
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
-        //file_get_contents($request->image->getRealPath());
         $image->img = file_get_contents($_FILES['img']['tmp_name']);
+        $image->img->set_charset('utf8');
+        // $image->img = mb_convert_encoding(file_get_contents($_FILES['img']['tmp_name']),"utf-8","sjis");
+        // dd(file_get_contents($_FILES['img']['tmp_name']));
+        // dd(mb_convert_encoding(file_get_contents($_FILES['img']['tmp_name']),"utf-8","sjis"));
+
+        // $image3 = Image::find(22);
+        // dd($image3->img);
+        // dd(strcmp($image->img,$image3->img));
+        // $conn->set_charset('utf8');
+
         $image->save();
-        dd(88);
 
         $exp = Portfolio1::find($request->input('expID'));
         $exp->imageID = $image->id;
