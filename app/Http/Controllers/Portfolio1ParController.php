@@ -66,6 +66,7 @@ class Portfolio1ParController extends Controller
         $exp = Portfolio1::find($id);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
+        
         if ($start->year == $end->year) {
             $betweenMonths = $end->month - $start->month + 1;
         } else {
@@ -73,30 +74,19 @@ class Portfolio1ParController extends Controller
                 12 * ($end->year - ($start->year + 1)) +
                 $end->month;
         }
-        //$calendar = calendar($date->firstOfMonth());
-        // $calendarstart=calendar($start);
-        // $calendarend=calendar($end);
-
-        //$calendar = calendar($start);
-        $calendars[] = calendar($start);
         $j = 0;
-        while ($j < $betweenMonths - 1) {
-            $calendars[] = calendar($end->modify('-1 month')->firstOfMonth());
+        while ($j < $betweenMonths) {
+            $calendars[] = calendar(new Carbon($start->format('Y-m-d')));
+            $start->modify('+1 month');
             $j = $j + 1;
         }
-        // if($calendarstart==$calendarend){
-        //     dd($calendars);
-        // }
 
-        // foreach($calendars as $calendar){
-        //     foreach($calendar as $week){
-        //         foreach($week as $day){
-        //             dd($day);
-        //         }
-        //     }
+        // $calendars[] = calendar($start);
+        // $j = 0;
+        // while ($j < $betweenMonths - 1) {
+        //     $calendars[] = calendar($end->modify('-1 month')->firstOfMonth());
+        //     $j = $j + 1;
         // }
-        //$start1 = new Carbon($exp->start);
-        // $end = new Carbon($exp->end);
 
         return view('portfolio1par.create', compact('participant', 'exp', 'start', 'end', 'calendars', 'betweenMonths'));
     }
