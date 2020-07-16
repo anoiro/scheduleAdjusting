@@ -215,10 +215,8 @@ class Portfolio1Controller extends Controller
             ->get();
         foreach ($candidates as $candidate) {
             $candidatesArray[] = $candidate;
-            //$nonUniParticipants[] = User::find($candidate->participantID);
             $participants[$candidate->participantID] = User::find($candidate->participantID);
         }
-        //$participants = array_unique($nonUniParticipants);
         $dates = array_column($candidatesArray, 'datetime');
 
         $participantIDs = array_unique(array_column($candidatesArray, 'participantID'));

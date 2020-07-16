@@ -15,21 +15,18 @@ function dates(CarbonInterface $month)
     //$last = date('m', strtotime("first day of $month"));
     $first = $month->firstOfMonth();
     $last = date('w', strtotime("first day of $month"));
-    //dd($last);
-
+ 
     for (; 0 <= $last - 1; $last -= 1) {
         $dates[] = new CarbonImmutable("$first-$last day");
+        // $dates[] = [];
     }
-    //dd($dates);
-
+ 
     //今月分(8/1~8/31)を$date配列に入れる
     $week = date('d', strtotime("last day of $month"));
-    //dd($week);
-
+ 
     for ($i = 0; $i < $week; $i += 1) {
         $dates[] = new CarbonImmutable("$first+$i day");
     }
-    //dd($dates);
 
     //カレンダーで来月の残り(今回9月分はなし)を$date配列に入れる
     $end = $month->lastOfMonth();

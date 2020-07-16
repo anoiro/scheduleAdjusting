@@ -80,17 +80,9 @@ class Portfolio1ParController extends Controller
             $start->modify('+1 month');
             $j = $j + 1;
         }
-
-        // $calendars[] = calendar($start);
-        // $j = 0;
-        // while ($j < $betweenMonths - 1) {
-        //     $calendars[] = calendar($end->modify('-1 month')->firstOfMonth());
-        //     $j = $j + 1;
-        // }
         $start = new Carbon($exp->start);
-        $end = new Carbon($exp->end);
 
-        return view('portfolio1par.create', compact('participant', 'exp', 'start', 'end', 'calendars', 'betweenMonths'));
+        return view('portfolio1par.create', compact('participant', 'exp', 'start', 'end', 'calendars'));
     }
 
     /**
