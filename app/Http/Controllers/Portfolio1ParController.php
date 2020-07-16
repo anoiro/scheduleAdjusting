@@ -23,15 +23,11 @@ class Portfolio1ParController extends Controller
             ->join('labs', 'portfolio1s.labID', '=', 'labs.id')
             ->select('portfolio1s.*', 'labs.prof',)
             ->get();
-        //dd(88);
-
         $participant = Auth::user();
-
         $expIDs = DB::table('candidates')
             ->select('expID')
             ->where('participantID', $participant->id)
             ->get();
-
         if ($expIDs->isEmpty()) {
             $expIDsArray = [];
         } else {
@@ -44,7 +40,6 @@ class Portfolio1ParController extends Controller
             //連想配列になっているからただのインデックスに
             //変える
             $expIDsArray = array_column($expIDsArrays, 'expID');
-            //dd(88);
         }
 
         return view('portfolio1par.index', compact('exps', 'participant', 'expIDsArray'));
@@ -59,12 +54,9 @@ class Portfolio1ParController extends Controller
     {
         $exp = Portfolio1::find($id);
         $img = Image::find($exp->imageID);
-        $labs = DB::table('labs')
-            ->select('id', 'prof')
-            ->where('labs.id', $exp->labID)
-            ->get();
+        $lab = Lab::find($exp->labID);
 
-        return view('portfolio1par.show', compact('exp', 'img', 'labs'));
+        return view('portfolio1par.show', compact('exp', 'img', 'lab'));
     }
 
     public function create(Request $request, $id)

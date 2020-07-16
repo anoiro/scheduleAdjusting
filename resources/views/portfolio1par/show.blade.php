@@ -25,9 +25,7 @@
                     @endif
 
                     {{ $exp->id }}
-                    @foreach($labs as $lab)
                     {{ $lab->prof }}研究室
-                    @endforeach
                     {{ $exp->expName }}
                     {{ $exp->start }}
                     {{ $exp->end }}
