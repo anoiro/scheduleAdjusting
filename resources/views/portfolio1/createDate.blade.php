@@ -79,7 +79,7 @@
                                     <tr>
                                         <th colspan="7">
                                             <div class="text-center">
-                                                {{ $start1->year }}年{{ $start1->month }}月
+                                                {{ $start->year }}年{{ $start->month }}月
                                             </div>
                                         </th>
                                     </tr>
@@ -155,7 +155,7 @@
                                     @endforeach
                                 </table>
                             </div>
-                            <?php $start1->modify('+1 month'); ?>
+                            <?php $start->modify('+1 month'); ?>
                         <?php endforeach; ?>
 
                         <input type="checkbox" name="caution" value="1">注意事項に同意する

@@ -236,9 +236,9 @@ class Portfolio1Controller extends Controller
             $start->modify('+1 month');
             $j = $j + 1;
         }
-        $start1 = new Carbon($exp->start);
+        $start = new Carbon($exp->start);
 
-        return view('portfolio1.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates', 'participants', 'calendars', 'start1'));
+        return view('portfolio1.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates', 'participants', 'calendars'));
     }
     /**
      * Store a newly created resource in storage.
