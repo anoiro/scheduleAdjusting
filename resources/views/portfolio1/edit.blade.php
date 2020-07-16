@@ -27,14 +27,7 @@
                     <form method="POST" action="{{ route('portfolio1.update', ['id'=>$exp->id]) }}">
                         @csrf
                         研究室
-                        @foreach($labs as $lab)
-                        <select name="labID">
-                            <option value="">選択してください</option>
-                            @foreach($labIDs as $labID)
-                            <option value="{{ $labID->id }}" @if(($lab->id)===($labID->id)) selected @endif>{{ $labID->prof }}研究室</option>
-                            @endforeach
-                        </select>
-                        @endforeach
+                        <input type="radio" name="labID" value='{{ $lab->id }}' checked>{{ $lab->prof }}研究室
                         <br>
                         実験名
                         <input type="text" name="expName" value="{{ $exp->expName }}">

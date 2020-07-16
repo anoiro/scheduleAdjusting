@@ -90,16 +90,13 @@ class Portfolio1Controller extends Controller
     {
         $exp = Portfolio1::find($id);
         $img = Image::find($exp->imageID);
-        $labs = DB::table('labs')
-            ->select('id', 'prof')
-            ->where('labs.id', $exp->labID)
-            ->get();
         $experimenter = Experimenter::find(Auth::id());
+        $lab = Lab::find($experimenter->labID);
         $candidateCount = DB::table('candidates')
             ->where('expID', $exp->id)
             ->count();
 
-        return view('portfolio1.show', compact('exp', 'img', 'labs', 'experimenter', 'candidateCount'));
+        return view('portfolio1.show', compact('exp', 'img', 'lab', 'experimenter', 'candidateCount'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -111,10 +108,8 @@ class Portfolio1Controller extends Controller
     {
         $exp = Portfolio1::find($id);
         $img = Image::find($exp->imageID);
-        $labs = DB::table('labs') #自分の研究室の指導教員
-            ->select('id', 'prof',)
-            ->where('labs.id', $exp->labID)
-            ->get();
+        $experimenter = Experimenter::find(Auth::id());
+        $lab = Lab::find($experimenter->labID);
         $labImgs = DB::table('images') #自分の研究室の他の画像
             ->select('id', 'labID', 'expID', 'img')
             ->where('images.labID', $exp->labID)
@@ -175,7 +170,7 @@ class Portfolio1Controller extends Controller
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
         $exps = DB::table('portfolio1s')
-            ->where('labID',$lab->id)
+            ->where('labID', $lab->id)
             ->get();
 
         return view('portfolio1.createImg', compact('experimenter', 'lab', 'exps'));
