@@ -9,6 +9,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Candidate;
+use App\Models\Lab;
 //use App\Models\Participant;
 use Auth;
 use Carbon\Carbon;
