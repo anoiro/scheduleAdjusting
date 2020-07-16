@@ -67,6 +67,7 @@ class Portfolio1ParController extends Controller
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
         
+        //カレンダーの日程を生成している。これが暫定ベスト
         if ($start->year == $end->year) {
             $betweenMonths = $end->month - $start->month + 1;
         } else {
@@ -81,8 +82,13 @@ class Portfolio1ParController extends Controller
             $j = $j + 1;
         }
         $start = new Carbon($exp->start);
+        
+        //開始日より前、終了日より後の日程を選択できない
+        //ように制限をかけるためのCarbon
+        $startRes = new Carbon($exp->start);
+        $endRes = new Carbon($exp->end);
 
-        return view('portfolio1par.create', compact('participant', 'exp', 'start', 'end', 'calendars'));
+        return view('portfolio1par.create', compact('participant', 'exp', 'start', 'end', 'calendars', 'startRes', 'endRes'));
     }
 
     /**
