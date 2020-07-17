@@ -44,7 +44,7 @@ class Portfolio1ParController extends Controller
         }
 
         //confirm用
-        $confirmedExpIDs = DB::table('cofirms')
+        $confirmedExpIDs = DB::table('confirms')
             ->select('expID')
             ->where('participantID', $participant->id)
             ->get();
