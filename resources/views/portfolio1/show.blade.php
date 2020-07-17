@@ -24,15 +24,40 @@
                     </div>
                     @endif
 
+                    実験ID
                     {{ $exp->id }}
+                    <br>
+                    <br>
+                    研究室
                     {{ $lab->prof }}研究室
+                    <br>
+                    <br>
+                    実験名
                     {{ $exp->expName }}
+                    <br>
+                    <br>
+                    開始日
                     {{ $exp->start }}
+                    <br>
+                    <br>
+                    終了予定日
                     {{ $exp->end }}
+                    <br>
+                    <br>
+                    募集人数
                     {{ $exp->recruit }}
+                    <br>
+                    <br>
+                    お礼
                     {{ $exp->thanks }}
+                    <br>
+                    <br>
+                    会場
                     {{ $exp->room }}
+                    <br>
+                    <br>
                     @if($img!=null)
+                    実験風景
                     <div>
                         <img src="data:image/jpg;base64,<?= $img->img ?>" style="width: 50%; height: auto;" />
                     </div>
