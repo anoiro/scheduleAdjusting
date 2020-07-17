@@ -118,7 +118,7 @@ class Portfolio1Controller extends Controller
             ->select('id', 'prof')
             ->get();
 
-        return view('portfolio1.edit', compact('exp', 'img', 'labs', 'labImgs', 'labIDs'));
+        return view('portfolio1.edit', compact('exp', 'img', 'lab', 'labImgs', 'labIDs'));
     }
     /**
      * Update the specified resource in storage.
