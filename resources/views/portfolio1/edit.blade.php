@@ -53,7 +53,7 @@
                         @if($img!=null)
                         実験風景
                         <div>
-                            <img src='data:img/jpg;base64,<?php print(base64_encode($img->img)); ?>' style="width: 50%; height: auto;" />
+                            <img src="data:image/jpg;base64,<?= $img->img ?>" style="width: 50%; height: auto;" />
                         </div>
                         <br>
                         @endif
@@ -63,7 +63,7 @@
                         <br>
                         @foreach($labImgs as $labImg)
                         <input type="radio" name="image" value="{{ $labImg->expID }}" @if(($exp->id)===($labImg->expID)) checked @endif>
-                        <img src='data:img/jpg;base64,<?php print(base64_encode($labImg->img)); ?>' style="width: 50%; height: auto;" />
+                        <img src="data:image/jpg;base64,<?= $labImg->img ?>" style="width: 50%; height: auto;" />
                         <br>
                         @endforeach
                         @endif
