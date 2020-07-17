@@ -43,7 +43,26 @@ class Portfolio1ParController extends Controller
             $expIDsArray = array_column($expIDsArrays, 'expID');
         }
 
-        return view('portfolio1par.index', compact('exps', 'participant', 'expIDsArray'));
+        //confirm用
+        $confirmedExpIDs = DB::table('cofirms')
+            ->select('expID')
+            ->where('participantID', $participant->id)
+            ->get();
+        if ($confirmedExpIDs->isEmpty()) {
+            $confirmedExpIDsArray = [];
+        } else {
+            //DBからとってきたObject型のexpIDsから
+            //要素を一つずつ取り出して配列に格納
+            foreach ($confirmedExpIDs as $confirmedExpID) {
+                $confirmedExpIDsArrays[] = $confirmedExpID;
+            }
+            //格納した配列は行ごとにフィールドをキーにした
+            //連想配列になっているからただのインデックスに
+            //変える
+            $confirmedExpIDsArray = array_column($confirmedExpIDsArrays, 'expID');
+        }
+
+        return view('portfolio1par.index', compact('exps', 'participant', 'expIDsArray', 'confirmedExpIDsArray'));
     }
     /**
      * Display the specified resource.

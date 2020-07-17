@@ -44,7 +44,7 @@
                             <td>{{ $exp->recruit }}</td>
                             <td>{{ $exp->thanks }}</td>
                             <td>{{ $exp->room }}</td>
-                            <td>@if(!empty($expIDsArray) and in_array($exp->id, $expIDsArray, true))<a href="{{ route('portfolio1par.edit', ['id'=>$exp->id]) }}"> 確定待ち @endif </td>
+                            <td>@if(!empty($expIDsArray) and in_array($exp->id, $expIDsArray, true))<a href="{{ route('portfolio1par.edit', ['id'=>$exp->id]) }}"> 確定待ち @elseif(!empty($confirmedExpIDsArray) and in_array($exp->id, $confirmedExpIDsArray, true)) 確定済み @endif </td>
                             {{-- 登録済み 日程確定済み 参加済み --}}
                             <td><a href="{{ route('portfolio1par.show', ['id'=>$exp->id]) }}">詳細を見る</a></td>
                         </tr>
