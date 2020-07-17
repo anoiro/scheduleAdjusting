@@ -131,8 +131,11 @@ class Portfolio1ParController extends Controller
             $exps[] = $value;
         }
         $datetimes = array_column($exps, 'datetime');
+        
+        $startRes = new Carbon($exp->start);
+        $endRes = new Carbon($exp->end);
 
-        return view('portfolio1par.edit', compact('participant', 'exp', 'date', 'calendar', 'datetimes'));
+        return view('portfolio1par.edit', compact('participant', 'exp', 'date', 'calendar', 'datetimes', 'startRes', 'endRes'));
     }
 
     /**
