@@ -46,7 +46,7 @@
                             <td>{{ $exp->room }}</td>
                             <td>@if(!empty($confirmedExpIDsArray) and in_array($exp->id, $confirmedExpIDsArray, true)) 確定済み @elseif(!empty($expIDsArray) and in_array($exp->id, $expIDsArray, true))<a href="{{ route('portfolio1par.edit', ['id'=>$exp->id]) }}"> 確定待ち @endif</td>
                             {{-- 登録済み 日程確定済み 参加済み --}}
-                            <td><a href="{{ route('portfolio1par.show', ['id'=>$exp->id]) }}">詳細を見る</a></td>
+                            <td><a href="{{ route('portfolio1.show', ['exp'=>$exp]) }}">詳細を見る</a></td>
                         </tr>
                         @endforeach
                     </table>

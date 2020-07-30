@@ -88,7 +88,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function () {
     //store
     Route::post('store/{id}', 'Portfolio1ParController@store')->name('portfolio1par.store');
     //show/{id}とかくと主キーと紐づけてアクセスできる
-    Route::get('show/{id}', 'Portfolio1ParController@show')->name('portfolio1par.show');
+    // Route::get('show/{id}', 'Portfolio1ParController@show')->name('portfolio1par.show');
+    Route::get('show/{exp}', 'Portfolio1ParController@show')->name('portfolio1par.show');
     //edit
     Route::get('edit/{id}', 'Portfolio1ParController@edit')->name('portfolio1par.edit');
     //update

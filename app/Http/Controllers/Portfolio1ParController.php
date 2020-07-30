@@ -70,9 +70,10 @@ class Portfolio1ParController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    // public function show($id)
+    public function show(Portfolio1 $exp)
     {
-        $exp = Portfolio1::find($id);
+        // $exp = Portfolio1::find($id);
         $img = Image::find($exp->imageID);
         $lab = Lab::find($exp->labID);
 
