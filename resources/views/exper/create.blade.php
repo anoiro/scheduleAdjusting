@@ -24,7 +24,7 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('portfolio1.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('exper.store') }}" enctype="multipart/form-data">
                         @csrf
                         研究室
                         <input type="radio" name="labID" value='{{ $lab->id }}'>{{ $lab->prof }}研究室

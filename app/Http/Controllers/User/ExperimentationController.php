@@ -1,28 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 
-use App\Models\Portfolio1;
+use App\Models\Experimentation;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Candidate;
 use App\Models\Lab;
-//use App\Models\Participant;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Validation\Rules\Exists;
 
-class Portfolio1ParController extends Controller
+class ExperimentationController extends Controller
 {
-    //
     public function index()
     {
-        $exps = DB::table('portfolio1s')
-            ->join('labs', 'portfolio1s.labID', '=', 'labs.id')
-            ->select('portfolio1s.*', 'labs.prof',)
+        $exps = DB::table('experimentations')
+            ->join('labs', 'experimentations.labID', '=', 'labs.id')
+            ->select('experimentations.*', 'labs.prof',)
             ->get();
         $participant = Auth::user();
         $expIDs = DB::table('candidates')
@@ -62,7 +60,8 @@ class Portfolio1ParController extends Controller
             $confirmedExpIDsArray = array_column($confirmedExpIDsArrays, 'expID');
         }
 
-        return view('portfolio1par.index', compact('exps', 'participant', 'expIDsArray', 'confirmedExpIDsArray'));
+        // return view('portfolio1par.index', compact('exps', 'participant', 'expIDsArray', 'confirmedExpIDsArray'));
+        return view('user.index', compact('exps', 'participant', 'expIDsArray', 'confirmedExpIDsArray'));
     }
     /**
      * Display the specified resource.
@@ -71,19 +70,20 @@ class Portfolio1ParController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function show($id)
-    public function show(Portfolio1 $exp)
+    public function show(experimentation $exp)
     {
-        // $exp = Portfolio1::find($id);
+        // $exp = experimentation::find($id);
         $img = Image::find($exp->imageID);
         $lab = Lab::find($exp->labID);
 
-        return view('portfolio1par.show', compact('exp', 'img', 'lab'));
+        // return view('portfolio1par.show', compact('exp', 'img', 'lab'));
+        return view('user.show', compact('exp', 'img', 'lab'));
     }
 
-    public function create(Request $request, $id)
+    public function create(Request $request, experimentation $exp)
     {
         $participant = Auth::user();
-        $exp = Portfolio1::find($id);
+        // $exp = experimentation::find($id);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
         
@@ -108,7 +108,8 @@ class Portfolio1ParController extends Controller
         $startRes = new Carbon($exp->start);
         $endRes = new Carbon($exp->end);
 
-        return view('portfolio1par.create', compact('participant', 'exp', 'start', 'end', 'calendars', 'startRes', 'endRes'));
+        // return view('portfolio1par.create', compact('participant', 'exp', 'start', 'end', 'calendars', 'startRes', 'endRes'));
+        return view('user.create', compact('participant', 'exp', 'start', 'end', 'calendars', 'startRes', 'endRes'));
     }
 
     /**
@@ -117,12 +118,12 @@ class Portfolio1ParController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $participantID)
     {
         foreach ($request->input('candidate') as $datetime) {
             $candiDate = new Candidate;
             $candiDate->expID = $request->input('expID');
-            $candiDate->participantID = $id;
+            $candiDate->participantID = $participantID;
             $candiDate->datetime = $datetime;
             $candiDate->save();
         }
@@ -135,10 +136,10 @@ class Portfolio1ParController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($expID)
+    public function edit(experimentation $exp)
     {
         $participant = Auth::user();
-        $exp = Portfolio1::find($expID);
+        // $exp = experimentation::find($expID);
         $date = new Carbon($exp->start);
 
         $calendar = calendar($date);
@@ -155,7 +156,8 @@ class Portfolio1ParController extends Controller
         $startRes = new Carbon($exp->start);
         $endRes = new Carbon($exp->end);
 
-        return view('portfolio1par.edit', compact('participant', 'exp', 'date', 'calendar', 'datetimes', 'startRes', 'endRes'));
+        // return view('portfolio1par.edit', compact('participant', 'exp', 'date', 'calendar', 'datetimes', 'startRes', 'endRes'));
+        return view('user.edit', compact('participant', 'exp', 'date', 'calendar', 'datetimes', 'startRes', 'endRes'));
     }
 
     /**
@@ -164,20 +166,20 @@ class Portfolio1ParController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $participantID)
     {
         //日程の新規追加
         foreach ($request->input('candidate') as $datetime) {
             $priorDate = DB::table('candidates')
                 ->select('datetime')
-                ->where('participantID', $id)
+                ->where('participantID', $participantID)
                 ->where('expID', $request->input('expID'))
                 ->where('datetime', $datetime)
                 ->get();
             if ($priorDate->count() === 0) {
                 $candiDate = new Candidate;
                 $candiDate->expID = $request->input('expID');
-                $candiDate->participantID = $id;
+                $candiDate->participantID = $participantID;
                 $candiDate->datetime = $datetime;
                 $candiDate->save();
             }
@@ -185,13 +187,13 @@ class Portfolio1ParController extends Controller
         //日程の削除
         $priorDate = DB::table('candidates')
             ->select('datetime')
-            ->where('participantID', $id)
+            ->where('participantID', $participantID)
             ->where('expID', $request->input('expID'))
             ->get();
         foreach ($priorDate as $datetime) {
             if (!in_array($datetime->datetime, $request->input('candidate'), true)) {
                 $deletingDate = DB::table('candidates')
-                    ->where('participantID', $id)
+                    ->where('participantID', $participantID)
                     ->where('expID', $request->input('expID'))
                     ->where('datetime', $datetime->datetime)
                     ->first();
@@ -207,11 +209,11 @@ class Portfolio1ParController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $expID)
+    public function destroy($participantID, experimentation $exp)
     {
         $deletingDates = DB::table('candidates')
-            ->where('participantID', $id)
-            ->where('expID', $expID)
+            ->where('participantID', $participantID)
+            ->where('expID', $exp->id)
             ->get();
         foreach ($deletingDates as $deletingDate) {
             $candidate = Candidate::find($deletingDate->id);

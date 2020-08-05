@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePortfolio1sTable extends Migration
+class CreateExperimentationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePortfolio1sTable extends Migration
      */
     public function up()
     {
-        Schema::create('portfolio1s', function (Blueprint $table) {
+        Schema::create('experimentations', function (Blueprint $table) {
             $table->bigIncrements('id'); #実験ID
             $table->bigInteger('labID'); #研究室ID
             $table->string('expName',255); #実験名
@@ -36,6 +36,6 @@ class CreatePortfolio1sTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('portfolio1s');
+        Schema::dropIfExists('experimentations');
     }
 }

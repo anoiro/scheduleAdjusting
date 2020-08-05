@@ -24,7 +24,7 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('portfolio1par.update', ['id'=>$participant->id]) }}">
+                    <form method="POST" action="{{ route('user.update', ['id'=>$participant->id]) }}">
                         @csrf
                         学籍番号
                         <br>
@@ -133,7 +133,7 @@
                         <br>
                         <input class="btn btn-info" type="submit" value="変更する">
                     </form>
-                    <form method="POST" action="{{ route('portfolio1par.destroy', ['id'=>$participant->id, 'expID'=>$exp->id]) }}" id="delete_{{ $participant->id }}">
+                    <form method="POST" action="{{ route('user.destroy', ['id'=>$participant->id, 'exp'=>$exp]) }}" id="delete_{{ $participant->id }}">
                         @csrf
                         <a href="#" class="btn btn-danger" data-id="{{ $participant->id }}" onclick="deletePost(this);">全て削除する</a>
                     </form>

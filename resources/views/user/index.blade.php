@@ -1,5 +1,5 @@
 <!-- resources/views/layouts/app.blade.phpとして保存 -->
-@extends('layouts.exper.app')
+@extends('layouts.user.app')
 @section('content')
 
 <style>
@@ -14,28 +14,12 @@
     .box-body {
         text-align: center;
     }
-
-    .btn-success {
-        border-color: #FF6600;
-        background: #FF6600;
-        color: #FFFFFF;
-    }
 </style>
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="box">
-                <form method='GET' action="{{ route('portfolio1.create') }}">
-                    <button type='submit' class='btn btn-primary'>
-                        実験新規登録
-                    </button>
-                </form>
-                <form method='GET' action="{{ route('portfolio1.createImg') }}">
-                    <button type='submit' class='btn btn-success'>
-                        実験風景画像登録
-                    </button>
-                </form>
                 <div class="box-header">実験参加フォーム</div>
                 <div class="box-body">
                     <table class="table table-striped">
@@ -48,6 +32,7 @@
                             <th>募集人数</th>
                             <th>お礼</th>
                             <th>会場</th>
+                            <th>参加状況</th>
                             <th>詳細</th>
                         </tr>
                         @foreach($exps as $exp)
@@ -55,11 +40,13 @@
                             <td>{{ $exp->start }}</td>
                             <td>{{ $exp->end }}</td>
                             <td>{{ $exp->expName }}</td>
-                            <td @if($exp->labID===$experimenter->labID) style="background-color:#FF6600; color:#ffffff;" @endif>{{ $exp->prof }}研究室</td>
+                            <td>{{ $exp->prof }}研究室</td>
                             <td>{{ $exp->recruit }}</td>
                             <td>{{ $exp->thanks }}</td>
                             <td>{{ $exp->room }}</td>
-                            <td><a href="{{ route('portfolio1.show', ['id'=>$exp->id]) }}">詳細を見る</a></td>
+                            <td>@if(!empty($confirmedExpIDsArray) and in_array($exp->id, $confirmedExpIDsArray, true)) 確定済み @elseif(!empty($expIDsArray) and in_array($exp->id, $expIDsArray, true))<a href="{{ route('portfolio1par.edit', ['id'=>$exp->id]) }}"> 確定待ち @endif</td>
+                            {{-- 登録済み 日程確定済み 参加済み --}}
+                            <td><a href="{{ route('user.show', ['exp'=>$exp]) }}">詳細を見る</a></td>
                         </tr>
                         @endforeach
                     </table>
