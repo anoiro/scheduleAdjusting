@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
-
-use App\Models\Experimentation;
-use App\Models\Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\Exists;
+
+use App\Http\Controllers\Controller;
+use Auth;
+use Carbon\Carbon;
+
+use App\Models\Image;
+use App\Models\Experimentation;
 use App\Models\User;
 use App\Models\Candidate;
 use App\Models\Lab;
-use Auth;
-use Carbon\Carbon;
-use Illuminate\Validation\Rules\Exists;
 
 class ExperimentationController extends Controller
 {
@@ -70,9 +72,9 @@ class ExperimentationController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function show($id)
-    public function show(experimentation $exp)
+    public function show($expID)
     {
-        // $exp = experimentation::find($id);
+        $exp = experimentation::find($expID);
         $img = Image::find($exp->imageID);
         $lab = Lab::find($exp->labID);
 

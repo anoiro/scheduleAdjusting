@@ -94,7 +94,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function () {
     Route::post('store/{participantID}', 'User\ExperimentationController@store')->name('user.store');
     //show/{id}とかくと主キーと紐づけてアクセスできる
     // Route::get('show/{exp}', 'Portfolio1ParController@show')->name('portfolio1par.show');
-    Route::get('show/{exp}', 'User\ExperimentationController@show')->name('user.show');
+    Route::get('show/{expID}', 'User\ExperimentationController@show')->name('user.show');
     //edit
     // Route::get('edit/{exp}', 'Portfolio1ParController@edit')->name('portfolio1par.edit');
     Route::get('edit/{exp}', 'User\ExperimentationController@edit')->name('user.edit');

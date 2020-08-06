@@ -6,6 +6,7 @@ use App\Models\Candidate;
 use Illuminate\Http\Request;
 
 use App\Models\Experimentation;
+use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Confirm;
 use App\Models\Experimenter;
