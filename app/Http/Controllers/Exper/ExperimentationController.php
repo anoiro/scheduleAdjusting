@@ -89,9 +89,9 @@ class ExperimentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(experimentation $exp)
+    public function show(Experimentation $exp)
     {
-        // $exp = experimentation::find($id);
+        // $exp = Experimentation::find($id);
         $img = Image::find($exp->imageID);
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
@@ -108,9 +108,9 @@ class ExperimentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(experimentation $exp)
+    public function edit(Experimentation $exp)
     {
-        // $exp = experimentation::find($id);
+        // $exp = Experimentation::find($id);
         $img = Image::find($exp->imageID);
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
@@ -132,9 +132,9 @@ class ExperimentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, experimentation $exp)
+    public function update(Request $request, Experimentation $exp)
     {
-        // $experimentation = experimentation::find($id);
+        // $experimentation = Experimentation::find($id);
 
         $exp->labID = $request->input('labID');
         $exp->expName = $request->input('expName');
@@ -157,9 +157,9 @@ class ExperimentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(experimentation $exp)
+    public function destroy(Experimentation $exp)
     {
-        // $experimentation = experimentation::find($id);
+        // $experimentation = Experimentation::find($id);
         // $experimentation->delete();
         $exp->delete();
 
@@ -197,7 +197,7 @@ class ExperimentationController extends Controller
         $image->img = base64_encode(file_get_contents($request->img->getRealPath()));
         $image->save();
 
-        $exp = experimentation::find($request->input('expID'));
+        $exp = Experimentation::find($request->input('expID'));
         $exp->imageID = $image->id;
         $exp->save();
 
@@ -208,11 +208,11 @@ class ExperimentationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createDate(experimentation $exp)
+    public function createDate(Experimentation $exp)
     {
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
-        // $exp = experimentation::find($expID);
+        // $exp = Experimentation::find($expID);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
 

@@ -74,7 +74,7 @@ class ExperimentationController extends Controller
     // public function show($id)
     public function show($expID)
     {
-        $exp = experimentation::find($expID);
+        $exp = Experimentation::find($expID);
         $img = Image::find($exp->imageID);
         $lab = Lab::find($exp->labID);
 
@@ -82,10 +82,10 @@ class ExperimentationController extends Controller
         return view('user.show', compact('exp', 'img', 'lab'));
     }
 
-    public function create(Request $request, experimentation $exp)
+    public function create(Request $request, Experimentation $exp)
     {
         $participant = Auth::user();
-        // $exp = experimentation::find($id);
+        // $exp = Experimentation::find($id);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
         
@@ -138,10 +138,10 @@ class ExperimentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(experimentation $exp)
+    public function edit(Experimentation $exp)
     {
         $participant = Auth::user();
-        // $exp = experimentation::find($expID);
+        // $exp = Experimentation::find($expID);
         $date = new Carbon($exp->start);
 
         $calendar = calendar($date);
@@ -211,7 +211,7 @@ class ExperimentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($participantID, experimentation $exp)
+    public function destroy($participantID, Experimentation $exp)
     {
         $deletingDates = DB::table('candidates')
             ->where('participantID', $participantID)
