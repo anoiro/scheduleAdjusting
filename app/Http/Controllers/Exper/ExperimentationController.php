@@ -57,6 +57,7 @@ class ExperimentationController extends Controller
     {
         //実験内容(画像以外)
         $experimentation = new Experimentation;
+        $experimentation = $request->validated();
         $experimentation->labID = $request->input('labID');
         $experimentation->expName = $request->input('expName');
         $experimentation->start = $request->input('start');
@@ -192,6 +193,7 @@ class ExperimentationController extends Controller
     public function storeImg(Request $request)
     {
         $image = new Image;
+        $image = $request->validated();
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
         $image->img = base64_encode(file_get_contents($request->img->getRealPath()));
@@ -212,7 +214,6 @@ class ExperimentationController extends Controller
     {
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
-        // $exp = Experimentation::find($expID);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
 
