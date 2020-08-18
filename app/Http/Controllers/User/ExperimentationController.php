@@ -15,6 +15,7 @@ use App\Models\Experimentation;
 use App\Models\User;
 use App\Models\Candidate;
 use App\Models\Lab;
+use Illuminate\Auth\Events\Validated;
 
 class ExperimentationController extends Controller
 {
@@ -124,6 +125,7 @@ class ExperimentationController extends Controller
     {
         foreach ($request->input('candidate') as $datetime) {
             $candiDate = new Candidate;
+            $candiDate = $request->validated();
             $candiDate->expID = $request->input('expID');
             $candiDate->participantID = $participantID;
             $candiDate->datetime = $datetime;
@@ -180,6 +182,7 @@ class ExperimentationController extends Controller
                 ->get();
             if ($priorDate->count() === 0) {
                 $candiDate = new Candidate;
+                $candiDate = $request->validated();
                 $candiDate->expID = $request->input('expID');
                 $candiDate->participantID = $participantID;
                 $candiDate->datetime = $datetime;
