@@ -1,1 +1,41 @@
-実験登録するときに画像はjpgのみ対応です。
+# The application form for psychological experiment
+That is the online form for psychological experiment which enables experimenters to recieve applications from the participants. Also experimenters can regsiter new experiment in this platform, and participants are able to choose some experiments by registering their available dates for participation in some experiments.
+
+# DEMO
+now in preparing
+
+# Requirement
+
+- PHP (>=6.0)
+- Node
+- Heroku
+
+# Setup
+
+
+- git clone https://github.com/anoiro/portfolio_1.git
+- cd portfolio_1
+- composer install
+- heroku run 'php artisan migrage'
+- heroku run 'php artisan --seed'
+
+# Usage
+
+## In case you are experimenter
+- Access to 'http://127.0.0.1/exper/register'
+- Register as a demo user and log in
+    - labID: '1'
+    - Name: 'experimenter1'
+    - Mail: 'experimenter1@com'
+    - Password: 'experimenter1'
+
+## In case you are participant
+- Access to 'http://127.0.0.1/user/register'
+- Register as a demo user and log in
+    - Student Number: '99990001'
+    - Name: 'participant1'
+    - Mail: 'participant1@com'
+    - Password: 'participant1'
+
+# Note
+- In case you are logged in as an experimenter, the extension of image file is needed to be jpeg.
