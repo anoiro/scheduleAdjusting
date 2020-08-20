@@ -10,8 +10,7 @@ That is the online form for psychological experiment which enables experimenters
 - git clone https://github.com/anoiro/portfolio_1.git
 - cd portfolio_1
 - composer install
-- heroku run 'php artisan migrage'
-- heroku run 'php artisan --seed'
+- heroku run 'php artisan migrage --seed'
 
 # Usage
 ## In case you are experimenter
