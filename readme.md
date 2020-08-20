@@ -26,7 +26,11 @@ That is the online form for psychological experiment which enables experimenters
     - Password: 'participant1'
 
 # DEMO
-now in preparing
+## In case you are experimenter
+
+
+## In case you are participant
+
 
 # Note
 - In case you are logged in as an experimenter, the extension of image file is needed to be jpeg.
