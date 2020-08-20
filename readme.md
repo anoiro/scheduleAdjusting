@@ -27,10 +27,10 @@ That is the online form for psychological experiment which enables experimenters
 
 # DEMO
 ## In case you are experimenter
-
+![experimenterCase](https://user-images.githubusercontent.com/45758121/90759463-6b2db080-e31b-11ea-9c97-164a83e871d7.gif)
 
 ## In case you are participant
-
+![participantCase](https://user-images.githubusercontent.com/45758121/90759450-67019300-e31b-11ea-809c-87ca3ed92549.gif)
 
 # Note
 - In case you are logged in as an experimenter, the extension of image file is needed to be jpeg.
