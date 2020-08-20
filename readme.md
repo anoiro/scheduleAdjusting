@@ -14,22 +14,15 @@ That is the online form for psychological experiment which enables experimenters
 - heroku run 'php artisan --seed'
 
 # Usage
-
 ## In case you are experimenter
 - Access to 'http://experimentapplicationform.herokuapp.com/exper/register'
-- Register as a demo user and log in
-    - LabID: '1'
-    - Name: 'experimenter1'
+- Log in as a demo user
     - E-Mail Address: 'experimenter1@com'
     - Password: 'experimenter1'
 
 ## In case you are participant
 - Access to 'http://experimentapplicationform.herokuapp.com/user/register'
-- Register as a demo user and log in
-    - Student Number: '99990001'
-    - Name: 'participant1'
-    - Gender: 'Male'
-    - Age: '22'
+- Log in as a demo user
     - E-Mail Address: 'participant1@com'
     - Password: 'participant1'
 
