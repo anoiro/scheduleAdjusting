@@ -1,9 +1,6 @@
 # The application form for psychological experiment
 That is the online form for psychological experiment which enables experimenters to recieve applications from the participants. Also experimenters can regsiter new experiment in this platform, and participants are able to choose some experiments by registering their available dates for participation in some experiments.
 
-# DEMO
-now in preparing
-
 # Requirement
 - PHP (>=6.0)
 - Node
@@ -35,6 +32,9 @@ now in preparing
     - Age: '22'
     - E-Mail Address: 'participant1@com'
     - Password: 'participant1'
+
+# DEMO
+now in preparing
 
 # Note
 - In case you are logged in as an experimenter, the extension of image file is needed to be jpeg.
