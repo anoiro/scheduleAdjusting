@@ -5,14 +5,11 @@ That is the online form for psychological experiment which enables experimenters
 now in preparing
 
 # Requirement
-
 - PHP (>=6.0)
 - Node
 - Heroku
 
 # Setup
-
-
 - git clone https://github.com/anoiro/portfolio_1.git
 - cd portfolio_1
 - composer install
@@ -22,19 +19,21 @@ now in preparing
 # Usage
 
 ## In case you are experimenter
-- Access to 'http://127.0.0.1/exper/register'
+- Access to 'http://experimentapplicationform.herokuapp.com/exper/register'
 - Register as a demo user and log in
-    - labID: '1'
+    - LabID: '1'
     - Name: 'experimenter1'
-    - Mail: 'experimenter1@com'
+    - E-Mail Address: 'experimenter1@com'
     - Password: 'experimenter1'
 
 ## In case you are participant
-- Access to 'http://127.0.0.1/user/register'
+- Access to 'http://experimentapplicationform.herokuapp.com/user/register'
 - Register as a demo user and log in
     - Student Number: '99990001'
     - Name: 'participant1'
-    - Mail: 'participant1@com'
+    - Gender: 'Male'
+    - Age: '22'
+    - E-Mail Address: 'participant1@com'
     - Password: 'participant1'
 
 # Note
