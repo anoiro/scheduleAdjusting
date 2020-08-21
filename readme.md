@@ -7,6 +7,7 @@ That is the online form for psychological experiment which enables experimenters
 # Setup
 - git clone https://github.com/anoiro/portfolio_1.git
 - cd portfolio_1
+- composer install
 - php artisan serve
 
 # Usage
