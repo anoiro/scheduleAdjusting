@@ -2,14 +2,12 @@
 That is the online form for psychological experiment which enables experimenters to recieve applications from the participants. Also experimenters can regsiter new experiment in this platform, and participants are able to choose some experiments by registering their available dates for participation in some experiments.
 
 # Requirement
-- PHP (>=6.0)
-- Node
-- Heroku
-- XAMPP
+- PHP (>=7.2)
 
 # Setup
 - git clone https://github.com/anoiro/portfolio_1.git
 - cd portfolio_1
+- php artisan serve
 
 # Usage
 ## In case you are experimenter
