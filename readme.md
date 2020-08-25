@@ -1,15 +1,6 @@
 # The application form for psychological experiment
 That is the online form for psychological experiment which enables experimenters to recieve applications from the participants. Also experimenters can regsiter new experiment in this platform, and participants are able to choose some experiments by registering their available dates for participation in some experiments.
 
-# Requirement
-- PHP (>=7.2)
-
-# Setup
-- git clone https://github.com/anoiro/portfolio_1.git
-- cd portfolio_1
-- composer install
-- php artisan serve
-
 # Usage
 ## In case you are experimenter
 - Access to 'http://experimentapplicationform.herokuapp.com/exper/login'
