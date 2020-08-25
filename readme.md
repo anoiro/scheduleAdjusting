@@ -12,13 +12,13 @@ That is the online form for psychological experiment which enables experimenters
 
 # Usage
 ## In case you are experimenter
-- Access to 'http://experimentapplicationform.herokuapp.com/exper/register'
+- Access to 'http://experimentapplicationform.herokuapp.com/exper/login'
 - Log in as a demo user
     - E-Mail Address: 'experimenter1@com'
     - Password: 'experimenter1'
 
 ## In case you are participant
-- Access to 'http://experimentapplicationform.herokuapp.com/user/register'
+- Access to 'http://experimentapplicationform.herokuapp.com/user/login'
 - Log in as a demo user
     - E-Mail Address: 'participant1@com'
     - Password: 'participant1'
