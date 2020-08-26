@@ -36,6 +36,7 @@ That is the online form for psychological experiment which enables experimenters
 ![experimenterCase](https://user-images.githubusercontent.com/45758121/91308018-a6335680-e7e9-11ea-9a07-68c2bb44b96c.gif)
 
 ## In case you are participant
+![participantCase](https://user-images.githubusercontent.com/45758121/91308323-14781900-e7ea-11ea-9eaf-1201956d5e39.gif)
 
 # Note
 - In case you are logged in as an experimenter, the extension of image file is needed to be jpeg.
