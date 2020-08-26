@@ -33,6 +33,7 @@ That is the online form for psychological experiment which enables experimenters
 
 # DEMO
 ## In case you are experimenter
+![experimenterCase](https://user-images.githubusercontent.com/45758121/91308018-a6335680-e7e9-11ea-9a07-68c2bb44b96c.gif)
 
 ## In case you are participant
 
