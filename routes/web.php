@@ -97,7 +97,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:user'], function () {
     Route::get('show/{expID}', 'User\ExperimentationController@show')->name('user.show');
     //edit
     // Route::get('edit/{exp}', 'Portfolio1ParController@edit')->name('portfolio1par.edit');
-    Route::get('edit/{exp}', 'User\ExperimentationController@edit')->name('user.edit');
+    Route::get('edit/{expID}', 'User\ExperimentationController@edit')->name('user.edit');
     //update
     // Route::post('update/{participantID}', 'Portfolio1ParController@update')->name('portfolio1par.update');
     Route::post('update/{participantID}', 'User\ExperimentationController@update')->name('user.update');
@@ -119,7 +119,7 @@ Route::group(['prefix' => 'exper', 'middleware' => 'auth:exper'], function () {
     Route::post('store', 'Exper\ExperimentationController@store')->name('exper.store');
     //show/{id}とかくと主キーと紐づけてアクセスできる
     // Route::get('show/{exp}', 'Portfolio1Controller@show')->name('portfolio1.show');
-    Route::get('show/{exp}', 'Exper\ExperimentationController@show')->name('exper.show');
+    Route::get('show/{expID}', 'Exper\ExperimentationController@show')->name('exper.show');
     //edit
     // Route::get('edit/{exp}', 'Portfolio1Controller@edit')->name('portfolio1.edit');
     Route::get('edit/{exp}', 'Exper\ExperimentationController@edit')->name('exper.edit');

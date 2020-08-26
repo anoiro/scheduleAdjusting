@@ -90,9 +90,10 @@ class ExperimentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Experimentation $exp)
+    // public function show(Experimentation $exp)
+    public function show($expID)
     {
-        // $exp = Experimentation::find($id);
+        $exp = Experimentation::find($expID);
         $img = Image::find($exp->imageID);
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);

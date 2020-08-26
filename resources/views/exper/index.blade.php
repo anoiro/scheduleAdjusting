@@ -59,7 +59,7 @@
                             <td>{{ $exp->recruit }}</td>
                             <td>{{ $exp->thanks }}</td>
                             <td>{{ $exp->room }}</td>
-                            <td><a href="{{ route('exper.show', ['exp'=>$exp]) }}">詳細を見る</a></td>
+                            <td><a href="{{ route('exper.show', ['expID'=>$exp->id]) }}">詳細を見る</a></td>
                         </tr>
                         @endforeach
                     </table>

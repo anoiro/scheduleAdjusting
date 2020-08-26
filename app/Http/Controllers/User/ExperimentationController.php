@@ -140,10 +140,11 @@ class ExperimentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Experimentation $exp)
+    // public function edit(Experimentation $exp)
+    public function edit($expID)
     {
         $participant = Auth::user();
-        // $exp = Experimentation::find($expID);
+        $exp = Experimentation::find($expID);
         $date = new Carbon($exp->start);
 
         $calendar = calendar($date);
@@ -159,7 +160,7 @@ class ExperimentationController extends Controller
         
         $startRes = new Carbon($exp->start);
         $endRes = new Carbon($exp->end);
-
+        
         // return view('portfolio1par.edit', compact('participant', 'exp', 'date', 'calendar', 'datetimes', 'startRes', 'endRes'));
         return view('user.edit', compact('participant', 'exp', 'date', 'calendar', 'datetimes', 'startRes', 'endRes'));
     }
