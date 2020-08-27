@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Exper;
 
-use App\Models\candidate;
+use App\Models\Candidate;
 use Illuminate\Http\Request;
 
-use App\Models\Portfolio1;
+use App\Models\Experimentation;
+use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Confirm;
 use App\Models\Experimenter;
@@ -15,17 +16,18 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class Portfolio1Controller extends Controller
+class ExperimentationController extends Controller
 {
     public function index()
     {
-        $exps = DB::table('portfolio1s')
-            ->join('labs', 'portfolio1s.labID', '=', 'labs.id')
-            ->select('portfolio1s.*', 'labs.prof',)
+        $exps = DB::table('experimentations')
+            ->join('labs', 'experimentations.labID', '=', 'labs.id')
+            ->select('experimentations.*', 'labs.prof',)
             ->get();
         $experimenter = Experimenter::find(Auth::id());
 
-        return view('portfolio1.index', compact('exps', 'experimenter'));
+        // return view('portfolio1.index', compact('exps', 'experimenter'));
+        return view('exper.index', compact('exps', 'experimenter'));
     }
 
     /**
@@ -42,7 +44,8 @@ class Portfolio1Controller extends Controller
             ->where('images.labID', $experimenter->labID)
             ->get();
 
-        return view('portfolio1.create', compact('experimenter', 'lab', 'labImgs'));
+        // return view('portfolio1.create', compact('experimenter', 'lab', 'labImgs'));
+        return view('exper.create', compact('experimenter', 'lab', 'labImgs'));
     }
     /**
      * Store a newly created resource in storage.
@@ -53,28 +56,29 @@ class Portfolio1Controller extends Controller
     public function store(Request $request)
     {
         //実験内容(画像以外)
-        $portfolio1 = new Portfolio1;
-        $portfolio1->labID = $request->input('labID');
-        $portfolio1->expName = $request->input('expName');
-        $portfolio1->start = $request->input('start');
-        $portfolio1->end = $request->input('end');
-        $portfolio1->recruit = $request->input('recruit');
-        $portfolio1->thanks = $request->input('thanks');
-        $portfolio1->room = $request->input('room');
-        $portfolio1->weekend = $request->input('weekend');
-        $portfolio1->save();
+        $experimentation = new Experimentation;
+        $experimentation = $request->validated();
+        $experimentation->labID = $request->input('labID');
+        $experimentation->expName = $request->input('expName');
+        $experimentation->start = $request->input('start');
+        $experimentation->end = $request->input('end');
+        $experimentation->recruit = $request->input('recruit');
+        $experimentation->thanks = $request->input('thanks');
+        $experimentation->room = $request->input('room');
+        $experimentation->weekend = $request->input('weekend');
+        $experimentation->save();
 
         //画像
         if ($_FILES['img']['tmp_name'] != null) {
             $image = new Image;
-            $image->labID = $portfolio1->labID;
-            $image->expID = $portfolio1->id;
+            $image->labID = $experimentation->labID;
+            $image->expID = $experimentation->id;
             $image->img = base64_encode(file_get_contents($request->img->getRealPath()));
             $image->save();
 
             //実験テーブルの画像IDを登録
-            $portfolio1->imageID = $image->id;
-            $portfolio1->save();
+            $experimentation->imageID = $image->id;
+            $experimentation->save();
         }
 
         return redirect('exper/index');
@@ -86,9 +90,10 @@ class Portfolio1Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    // public function show(Experimentation $exp)
+    public function show($expID)
     {
-        $exp = Portfolio1::find($id);
+        $exp = Experimentation::find($expID);
         $img = Image::find($exp->imageID);
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
@@ -96,7 +101,8 @@ class Portfolio1Controller extends Controller
             ->where('expID', $exp->id)
             ->count();
 
-        return view('portfolio1.show', compact('exp', 'img', 'lab', 'experimenter', 'candidateCount'));
+        // return view('portfolio1.show', compact('exp', 'img', 'lab', 'experimenter', 'candidateCount'));
+        return view('exper.show', compact('exp', 'img', 'lab', 'experimenter', 'candidateCount'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -104,9 +110,9 @@ class Portfolio1Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Experimentation $exp)
     {
-        $exp = Portfolio1::find($id);
+        // $exp = Experimentation::find($id);
         $img = Image::find($exp->imageID);
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
@@ -118,7 +124,8 @@ class Portfolio1Controller extends Controller
             ->select('id', 'prof')
             ->get();
 
-        return view('portfolio1.edit', compact('exp', 'img', 'lab', 'labImgs', 'labIDs'));
+        // return view('portfolio1.edit', compact('exp', 'img', 'lab', 'labImgs', 'labIDs'));
+        return view('exper.edit', compact('exp', 'img', 'lab', 'labImgs', 'labIDs'));
     }
     /**
      * Update the specified resource in storage.
@@ -127,22 +134,22 @@ class Portfolio1Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Experimentation $exp)
     {
-        $portfolio1 = Portfolio1::find($id);
+        // $experimentation = Experimentation::find($id);
 
-        $portfolio1->labID = $request->input('labID');
-        $portfolio1->expName = $request->input('expName');
+        $exp->labID = $request->input('labID');
+        $exp->expName = $request->input('expName');
         //ゆくゆくは画像の更新もできるようにしたい
-        //$portfolio1->imageID = $request->input('imageID');
-        $portfolio1->start = $request->input('start');
-        $portfolio1->end = $request->input('end');
-        $portfolio1->recruit = $request->input('recruit');
-        $portfolio1->thanks = $request->input('thanks');
-        $portfolio1->room = $request->input('room');
+        //$exp->imageID = $request->input('imageID');
+        $exp->start = $request->input('start');
+        $exp->end = $request->input('end');
+        $exp->recruit = $request->input('recruit');
+        $exp->thanks = $request->input('thanks');
+        $exp->room = $request->input('room');
 
         //上で代入した値たちを保存する
-        $portfolio1->save();
+        $exp->save();
         //indexページに飛ばすheaderみたいな感じかな
         return redirect('exper/index');
     }
@@ -152,10 +159,11 @@ class Portfolio1Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Experimentation $exp)
     {
-        $portfolio1 = Portfolio1::find($id);
-        $portfolio1->delete();
+        // $experimentation = Experimentation::find($id);
+        // $experimentation->delete();
+        $exp->delete();
 
         return redirect('exper/index');
     }
@@ -169,11 +177,12 @@ class Portfolio1Controller extends Controller
     {
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
-        $exps = DB::table('portfolio1s')
+        $exps = DB::table('experimentations')
             ->where('labID', $lab->id)
             ->get();
 
-        return view('portfolio1.createImg', compact('experimenter', 'lab', 'exps'));
+        // return view('portfolio1.createImg', compact('experimenter', 'lab', 'exps'));
+        return view('exper.createImg', compact('experimenter', 'lab', 'exps'));
     }
 
     /**
@@ -185,12 +194,13 @@ class Portfolio1Controller extends Controller
     public function storeImg(Request $request)
     {
         $image = new Image;
+        $image = $request->validated();
         $image->labID = $request->input('labID');
         $image->expID = $request->input('expID');
         $image->img = base64_encode(file_get_contents($request->img->getRealPath()));
         $image->save();
 
-        $exp = Portfolio1::find($request->input('expID'));
+        $exp = Experimentation::find($request->input('expID'));
         $exp->imageID = $image->id;
         $exp->save();
 
@@ -201,21 +211,23 @@ class Portfolio1Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createDate($expID)
+    public function createDate(Experimentation $exp)
     {
         $experimenter = Experimenter::find(Auth::id());
         $lab = Lab::find($experimenter->labID);
-        $exp = Portfolio1::find($expID);
         $start = new Carbon($exp->start);
         $end = new Carbon($exp->end);
 
         $img = Image::find($exp->imageID);
+
         $candidates = DB::table('candidates')
             ->where('expID', $exp->id)
             ->get();
+
         foreach ($candidates as $candidate) {
             $candidatesArray[] = $candidate;
-            $participants[$candidate->participantID] = User::find($candidate->participantID);
+            // $participants[$candidate->participantID] = User::find($candidate->participantID);
+            $participants[$candidate->participantID] = $candidates->users()->$candidate->participantID;
         }
         $dates = array_column($candidatesArray, 'datetime');
 
@@ -236,7 +248,8 @@ class Portfolio1Controller extends Controller
         }
         $start = new Carbon($exp->start);
 
-        return view('portfolio1.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates', 'participants', 'calendars'));
+        // return view('portfolio1.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates', 'participants', 'calendars'));
+        return view('exper.createDate', compact('experimenter', 'lab', 'exp', 'start', 'img', 'candidates', 'dates', 'participants', 'calendars'));
     }
     /**
      * Store a newly created resource in storage.
@@ -248,6 +261,7 @@ class Portfolio1Controller extends Controller
     {
         foreach (array_keys($request->input('confirms')) as $participantID) {
             $confirm = new Confirm;
+            $confirm = $request->validated();
             $confirm->expID = $request->input('expID');
             $confirm->participantID = $participantID;
             $confirm->datetime = Candidate::find($request->input('confirms')[$participantID][0])->datetime;

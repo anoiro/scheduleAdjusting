@@ -26,12 +26,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="box">
-                <form method='GET' action="{{ route('portfolio1.create') }}">
+                <form method='GET' action="{{ route('exper.create') }}">
                     <button type='submit' class='btn btn-primary'>
                         実験新規登録
                     </button>
                 </form>
-                <form method='GET' action="{{ route('portfolio1.createImg') }}">
+                <form method='GET' action="{{ route('exper.createImg') }}">
                     <button type='submit' class='btn btn-success'>
                         実験風景画像登録
                     </button>
@@ -59,7 +59,7 @@
                             <td>{{ $exp->recruit }}</td>
                             <td>{{ $exp->thanks }}</td>
                             <td>{{ $exp->room }}</td>
-                            <td><a href="{{ route('portfolio1.show', ['id'=>$exp->id]) }}">詳細を見る</a></td>
+                            <td><a href="{{ route('exper.show', ['expID'=>$exp->id]) }}">詳細を見る</a></td>
                         </tr>
                         @endforeach
                     </table>

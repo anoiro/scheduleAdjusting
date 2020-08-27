@@ -24,7 +24,7 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('portfolio1.update', ['id'=>$exp->id]) }}">
+                    <form method="POST" action="{{ route('exper.update', ['exp'=>$exp]) }}">
                         @csrf
                         研究室
                         <input type="radio" name="labID" value='{{ $lab->id }}' checked>{{ $lab->prof }}研究室

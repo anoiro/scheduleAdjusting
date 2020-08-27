@@ -24,7 +24,7 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('portfolio1par.store', ['id'=>$participant->id]) }}">
+                    <form method="POST" action="{{ route('user.store', ['participantID'=>$participant->id]) }}">
                         @csrf
                         学籍番号
                         <br>
